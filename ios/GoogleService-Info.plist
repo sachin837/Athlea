@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>422028132636-hg3ob8j41rjsdtovh5lqhvhq3s44950r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.422028132636-hg3ob8j41rjsdtovh5lqhvhq3s44950r</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>422028132636-6ka03mii9cc0je3k0u60224ggbah9fec.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyCPgvi5meIuyLB8-xWbByWhipcVZbbfyRE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>422028132636</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.athlea.athleaexpo</string>
+	<key>PROJECT_ID</key>
+	<string>athlea-dc449</string>
+	<key>STORAGE_BUCKET</key>
+	<string>athlea-dc449.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:422028132636:ios:64fb0bfd45cacdc1457ad9</string>
+	<key>DATABASE_URL</key>
+	<string>https://athlea-dc449-default-rtdb.europe-west1.firebasedatabase.app</string>
+</dict>
+</plist>

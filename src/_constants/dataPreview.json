@@ -1,0 +1,97 @@
+{
+  "Monday": [
+    {
+      "session_type": "Bike",
+      "duration": "1 hr 20 min",
+      "intensity": "Moderate/Endurance",
+      "details": "Start with a 20-minute warm-up in Z2, followed by intervals: 4 x (10 min in Z3 with 5 min recoveries in Z2)",
+      "macronutrients": {"protein": "30g", "carbohydrates": "80g", "fat": "15g"},
+      "caloric_intake": "500"
+    }
+  ],
+  "Tuesday": [
+    {
+      "session_type": "Bike",
+      "duration": "55 mins",
+      "intensity": "Hard/Threshold",
+      "details": {"warm_up": "15 mins easy spin in Z2", "main_set": "6 x (3 min in upper Z4 + 2 min recoveries in Z1-Z2)", "warm_down": "10 mins easy spin down in Z2"},
+      "macronutrients": {"protein": "25g", "carbohydrates": "70g", "fat": "12g"},
+      "caloric_intake": "450"
+    }
+  ],
+  "Wednesday": [
+    {
+      "session_type": "Bike",
+      "duration": "1 hr 30 mins",
+      "intensity": "Steady/Endurance",
+      "details": "A steady ride, focusing mainly on endurance in Z2, gradually building up the time spent cycling.",
+      "macronutrients": {"protein": "35 g", "carbohydrates": "90 g", "fat": "20 g"},
+      "caloric_intake": "600"
+    }
+  ],
+  "Thursday": {
+    "rest_day": {
+      "activities": "Recovery, promoting adaptation to previous training stresses.",
+      "macronutrients": {"protein": "20g", "carbohydrates": "50g", "fat": "10g"},
+      "caloric_intake": "350"
+    }
+  },
+  "Friday": [
+    {
+      "session_type": "Bike",
+      "duration": "2h 30min",
+      "intensity": "Steady/Endurance",
+      "details": {
+        "warm_up": "30 mins easy cycling in Z2",
+        "main_set": "4 x (20 min in Z3 with 5 min recoveries in Z2)",
+        "warm_down": "20 min easy cycling in Z2"
+      },
+      "macronutrients": {"protein": "40g", "carbohydrates": "120g", "fat": "25g"},
+      "caloric_intake": "750"
+    },
+    {
+      "session_type": "Strength and Conditioning",
+      "duration": "45 mins",
+      "intensity": "Adaptation Phase",
+      "details": {
+        "exercises": [
+          {"name": "Lat Pull-downs", "reps": "12-15", "sets": "1", "rest": "90 secs"},
+          {"name": "Leg Extensions", "reps": "12-15", "sets": "1", "rest": "90 secs"}
+        ],
+        "notes": "Focus on proper form and moderate resistance to support cycling performance and overall fitness without excessive fatigue."
+      },
+      "macronutrients": {"protein": "30g", "carbohydrates": "40g", "fat": "15g"},
+      "caloric_intake": "400"
+    }
+  ],
+  "Saturday": [
+    {
+      "session_type": "Bike",
+      "duration": "2 hrs 40 mins",
+      "intensity": "Moderate/Endurance",
+      "details": "Ride mainly in Z2 today. At some point (once you’re warmed up) do: 4x (10 mins in upper Z3 to low Z4 + 3 min recoveries in Z2).",
+      "macronutrients": {"protein": "40g", "carbohydrates": "100g", "fat": "20g"},
+      "caloric_intake": "700"
+    }
+  ],
+  "Sunday": [
+    {
+      "session_type": "Bike",
+      "duration": "3 hrs",
+      "intensity": "Long Endurance",
+      "details": "Long ride at an easy/steady intensity, mainly in Z2. Focus on maintaining a consistent effort to build endurance and efficiency.",
+      "macronutrients": {"protein": "45g", "carbohydrates": "130g", "fat": "25g"},
+      "caloric_intake": "800"
+    }
+  ],
+  "Saturday": [
+    {
+      "session_type": "Run",
+      "duration": "45 mins",
+      "intensity": "Moderate",
+      "details": {"warm_up": "10 min easy jog in Z2", "main_set": "5 x (2 min in upper Z3 + 2 min recovery in Z1-Z2)", "cool_down": "10 min easy jog in Z2"},
+      "macronutrients": null,
+      "caloric_intake": null
+    }
+  ]
+}

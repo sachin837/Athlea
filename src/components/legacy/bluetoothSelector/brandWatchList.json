@@ -1,0 +1,36 @@
+[
+  {
+    "name": "Apple",
+    "icon": "Apple.png",
+    "watches": [
+      {
+        "name": "Series 1",
+        "image": "AppleWatchSeries1.png"
+      },
+      {
+        "name": "Series 2",
+        "image": "AppleWatchSeries2.png"
+      },
+      {"name": "Series 3", "image": "AppleWatchSeries3.png"}
+    ]
+  },
+  {
+    "name": "Garmin",
+    "icon": "Garmin.png",
+    "watches": [
+      {"name": "Garmin HRM1", "image": "Garmin_HRMRUN_Sensor1.png"},
+      {"name": "Vivoactive 5", "image": "FitbitVersa2.png"},
+      {"name": "Venu 3S", "image": "FitbitVersa3.png"},
+      {"name": "Forerunner 265", "image": "FitbitVersa4.png"}
+    ]
+  },
+  {
+    "name": "Fitbit",
+    "icon": "Fitbit.png",
+    "watches": [
+      {"name": "Versa 2", "image": "Forerunner265.png"},
+      {"name": "Versa 3", "image": "Venu3s.png"},
+      {"name": "Versa 4", "image": "vivoactive5.png"}
+    ]
+  }
+]

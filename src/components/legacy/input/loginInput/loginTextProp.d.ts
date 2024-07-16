@@ -1,0 +1,22 @@
+export type CustomInputProps = {
+  value: string;
+  placeholder?: string;
+  onChangeText?: (text: string) => void;
+  placeholderTextColor?: string;
+  handleChange: (text: string) => void;
+  handleBlur: (text: any) => void;
+  customStyle?: any;
+  handleSubmit?: () => void | undefined;
+  onMaxLengthReached?: () => void | undefined;
+  showMaxChar?: boolean;
+  maxLength?: number;
+  loading?: boolean;
+  focused?: boolean;
+  onSubmitEditing?: () => void;
+  onFocus?: () => void;
+  onBlur?: () => void;
+  onPress?: () => void;
+  secureTextEntry?: boolean;
+  keyboardType?: string;
+  autoCapitalize?: string;
+};
