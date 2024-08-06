@@ -6,6 +6,8 @@ export enum TrainingTypes {
   recovery = 'recovery',
   nutrition = 'nutrition',
   wellBeing = 'wellBeing',
+  running = 'running',
+  cycling = 'cycling'
 }
 
 export const TrainingNames = {

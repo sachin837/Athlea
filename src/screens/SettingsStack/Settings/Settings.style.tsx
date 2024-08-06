@@ -23,3 +23,7 @@ export const Username = styled.Text`
     font-size: 18px;
   `}
 `
+export const BackButton = styled.TouchableOpacity`
+  gap: 4px;
+  marging-right:5px;
+`

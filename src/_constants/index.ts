@@ -1,4 +1,5 @@
-export * from './routeNames.ts'
+export * from './routeNames'
 export * from './validationSchemes'
 export * from './authInfo'
-export * from './trainingTypes.ts'
+export * from './trainingTypes'
+export * from './apiLinks'

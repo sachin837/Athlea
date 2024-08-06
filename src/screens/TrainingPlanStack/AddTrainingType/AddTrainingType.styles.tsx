@@ -42,7 +42,8 @@ export const ListContainer = styled.View`
 `;
 
 export const ItemContainer = styled.View`
-  background-color: #ffff;
+  ${({ theme }) => css`
+  background-color: ${theme.background};
   align-items: center;
   justify-content: center;
   padding: 8px;
@@ -53,6 +54,7 @@ export const ItemContainer = styled.View`
   position: relative;
   width:100%;
   elevation: 5;
+   `}
 `;
 
 export const StarIcon = styled(Icon)`

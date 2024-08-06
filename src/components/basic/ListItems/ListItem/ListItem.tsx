@@ -14,7 +14,7 @@ export const ListItem:FC<Props> = (props) => {
   return (
     <TouchableOpacity onPress={props.onPress}>
       <Row>
-        <Title style={props.textStyles}>{props.title}</Title>
+        <Title style={[props.textStyles]}>{props.title}</Title>
         {!props.rightComponent && <Icon name={'chevron-forward-outline'} size={18} />}
         {!!props.rightComponent && props.rightComponent}
       </Row>

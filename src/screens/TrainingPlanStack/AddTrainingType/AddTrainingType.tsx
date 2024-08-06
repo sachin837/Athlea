@@ -1,31 +1,33 @@
 import { BackHeader, Text } from '../../../components'
-import Icons from '../../../assets/icons/Icons'
+import { ScrollView, FlatList, TouchableOpacity } from 'react-native'
+import { useTheme } from 'styled-components/native'
 import { MainContainer, styles, TitleContainer, SectionContainer, StarIcon, ItemContainer } from './AddTrainingType.styles'
-import { ScrollView, FlatList, Alert , TouchableOpacity} from 'react-native'
 import { useAddTrainingType } from './useAddTrainingType'
-import { View } from 'react-native-animatable'
-
+import Icons from '../../../assets/icons/Icons'
 
 export const AddTrainingType = () => {
-  const { data, ManualEntry,onStrengthTraining } = useAddTrainingType()
+  const theme = useTheme()
+  const { data, ManualEntry, onStrengthTraining } = useAddTrainingType()
+
   const renderItem = ({ item }) => (
     <TouchableOpacity style={{ flex: 1, margin: 4, }} activeOpacity={0.9} onPress={() => onStrengthTraining()} >
       <ItemContainer>
         <StarIcon name="star" size={20} color="#CBD5E1" />
       </ItemContainer>
-      <Text style={{ padding: 5, fontWeight: 'bold', color: 'black', fontSize: 14}}>{item.name}</Text>
+      <Text type={'heading3'} weight='bold' size={14} themeColor={'subtitle'} padding={4}>{item.name}</Text>
     </TouchableOpacity>
   );
+
   return (
     <MainContainer>
       <BackHeader
         title={'Add session'}
-        rightComponent={<Icons name={'add'} size={16} onPress={() => ManualEntry()}/>}
+        rightComponent={<Icons name={'add'} size={16} onPress={() => ManualEntry()} />}
       />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <TitleContainer>
-          <Text type={'heading2'} style={{ fontWeight: 'bold', color: 'black' }}>Strength sessions library</Text>
-          <Text type={'subBody'} themeColor={'subtitle'}>Select from available sessions or add new</Text>
+          <Text type={'heading2'} weight='bold' themeColor={'subtitle'}>{"Strength sessions library"}</Text>
+          <Text type={'subBody'} themeColor={'subtitle'}>{"Select from available sessions or add new"}</Text>
         </TitleContainer>
         <SectionContainer>
           <FlatList
@@ -37,6 +39,6 @@ export const AddTrainingType = () => {
           />
         </SectionContainer>
       </ScrollView>
-    </MainContainer >
+    </MainContainer>
   )
 }

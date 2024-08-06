@@ -1,11 +1,11 @@
-import {useCallback} from 'react'
-import {FlatList, View} from 'react-native'
-import {TabView} from 'react-native-tab-view'
-import {RouteNames} from '_constants'
-import {HomeHeader, PlanCard, PreviewByDay, TabBar, Timeline} from 'components'
-import {HeaderContainer, HorizontalContainer} from './Train.styled'
-import {TrainTabs, useTrain} from './useTrain'
-
+import { useCallback } from 'react'
+import { FlatList, View } from 'react-native'
+import { TabView } from 'react-native-tab-view'
+import { RouteNames } from '_constants'
+import { HomeHeader, PlanCard, PreviewByDay, TabBar, Timeline } from 'components'
+import { HeaderContainer, HorizontalContainer } from './Train.styled'
+import { TrainTabs, useTrain } from './useTrain'
+import { useTheme } from 'styled-components/native'
 
 export const Train = (props) => {
 
@@ -17,8 +17,9 @@ export const Train = (props) => {
     onLayout,
     tabsHeight,
   } = useTrain()
+  const theme = useTheme()
 
-  const renderItem = useCallback(({item, index}) => (
+  const renderItem = useCallback(({ item, index }) => (
     <PlanCard
       title={item.title}
       trainingResults={item.data}
@@ -26,23 +27,21 @@ export const Train = (props) => {
     />
   ), [])
 
-  const renderScene = ({route}) => {
+  const renderScene = ({ route }) => {
     switch (route.key) {
-    case TrainTabs.phases:
-      return  <Timeline onLayout={onLayout(0)} />
-    case TrainTabs.calendar:
-      return (
-        <HorizontalContainer>
-          <PreviewByDay onLayout={onLayout(1)} data={[]} />
-        </HorizontalContainer>
-      )
+      case TrainTabs.phases:
+        return <Timeline onLayout={onLayout(0)} />
+      case TrainTabs.calendar:
+        return (
+          <HorizontalContainer>
+            <PreviewByDay onLayout={onLayout(1)} data={[]} />
+          </HorizontalContainer>
+        )
     }
   }
 
-  console.log(tabsHeight, 'selectedTab')
-
   return (
-    <View style={{flex: 1}}>
+    <View style={{ flex: 1, backgroundColor: theme.pageBackground }}>
       <HomeHeader />
       <FlatList
         data={data}
@@ -59,15 +58,15 @@ export const Train = (props) => {
             <TabView
               swipeEnabled={false}
               onIndexChange={setSelectedTab}
-              navigationState={{index: selectedTab, routes}}
-              initialLayout={{height: 300}}
+              navigationState={{ index: selectedTab, routes }}
+              initialLayout={{ height: 300 }}
               renderScene={renderScene}
               renderTabBar={() => null}
-              style={{height: tabsHeight[selectedTab]}}
+              style={{ height: tabsHeight[selectedTab], }}
             />
           </HeaderContainer>
         }
-        contentContainerStyle={{gap: 16, padding: 16}}
+        contentContainerStyle={{ gap: 16, padding: 16 }}
       />
     </View>
   )

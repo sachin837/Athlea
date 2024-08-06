@@ -1,30 +1,37 @@
-import { View, ScrollView, StyleSheet, FlatList } from 'react-native'
+import React, { useCallback } from 'react';
+import { View, ScrollView, TouchableOpacity, FlatList } from 'react-native'
+import { useTheme } from 'styled-components/native'
 import { BackHeader, Text } from '../../../components';
 import {
-  MainContainer, TitleContainer, SectionContainer, styles
+  MainContainer, TitleContainer, SectionContainer, styles,
+  CardContainer, InfoContainer, Row
 } from './AddNewActivity.styles';
 import Dropdown from '../../../components/basic/Dropdown/Dropdown';
 import { useAddTrainingType } from './useAddNewActivityType';
-export const AddNewActivity = () => {
-  const { BodyPart, activities } = useAddTrainingType();
 
-  const renderActivity = ({ item }) => {
-    const UserComponent = item.userImage;
-    const IconComponent = item.image;
+export const AddNewActivity = () => {
+  const theme = useTheme()
+  const { BodyPart, activities, EditActivity } = useAddTrainingType();
+
+  const renderActivity = useCallback((item: any) => {
+    const UserComponent = item?.item?.userImage;
     return (
-      <View style={stylesInner.card} >
-        <UserComponent width={50} height={50} style={stylesInner.image} />
-        <View style={stylesInner.info}>
-          <Text style={stylesInner.title}>{item.title}</Text>
-          <View style={{ flexDirection: 'row' }}>
-            <Text style={stylesInner.description}>{item?.description}</Text>
-            <Text style={stylesInner.duration}>● {item?.dis}</Text>
-            <Text style={stylesInner.duration}>● {item?.duration}</Text>
-          </View>
-        </View>
-      </View>
+      <TouchableOpacity onPress={() => EditActivity()}>
+        <CardContainer>
+          <UserComponent width={50} height={50} style={styles.image} />
+          <InfoContainer>
+            <Text type={'heading2'} size={18} themeColor={'subtitle'} weight='700'>{item.item.title}</Text>
+            <Row>
+              <Text themeColor={'subtitle'}>{item.item?.description}</Text>
+              <Text themeColor={'subtitle'}> ● {item.item?.dis}</Text>
+              <Text themeColor={'subtitle'}> ● {item.item?.duration}</Text>
+            </Row>
+          </InfoContainer>
+        </CardContainer>
+      </TouchableOpacity>
     );
-  };
+  }, [EditActivity]);
+
   return (
     <MainContainer>
       <BackHeader
@@ -32,18 +39,18 @@ export const AddNewActivity = () => {
       />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <TitleContainer>
-          <Text type={'heading2'} style={{ fontWeight: 'bold', color: 'black' }}>Add new activity</Text>
-          <Text type={'subBody'} themeColor={'subtitle'}>Set up the activities list</Text>
+          <Text type={'heading2'} themeColor={'subtitle'} weight='bold'>{"Add new activity"}</Text>
+          <Text type={'subBody'} themeColor={'subtitle'}>{"Set up the activities list"}</Text>
         </TitleContainer>
-        <SectionContainer style={{ backgroundColor: '#fff', padding: 10, borderRadius: 10, marginTop: 15 }}>
+        <SectionContainer style={styles.SectionContainer}>
           <View>
-            <Text style={stylesInner.label}>Body Part</Text>
+            <Text style={styles.label} themeColor={'subtitle'}>{"Body Part"}</Text>
             <Dropdown data={BodyPart} />
-            <Text style={stylesInner.label}>Equipment</Text>
+            <Text style={styles.label} themeColor={'subtitle'}>{"Equipment"}</Text>
             <Dropdown data={BodyPart} />
           </View>
         </SectionContainer>
-        <View style={{marginTop:20}}>
+        <View style={{ marginTop: 20 }}>
           <FlatList
             data={activities}
             renderItem={renderActivity}
@@ -54,52 +61,3 @@ export const AddNewActivity = () => {
     </MainContainer>
   )
 }
-
-const stylesInner = StyleSheet.create({
-  label: {
-    fontSize: 16,
-    marginBottom: 8,
-    color: '#000', // Set the text color to match your design
-  },
-  card: {
-    flexDirection: 'row',
-    paddingVertical: 10,
-    alignItems: 'center',
-    backgroundColor:'#fff',
-    marginVertical:5,
-    paddingHorizontal:10,
-    borderRadius:12
-  },
-  separator: {
-    height: 1,
-    backgroundColor: '#ccc',
-    marginVertical: 5,
-  },
-  image: {
-    width: 50,
-    height: 50,
-    borderRadius: 25,
-    marginRight: 16,
-  },
-  info: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#333',
-  },
-  description: {
-    color: '#99a3a4',
-    marginRight: 5,
-    fontSize: 12
-  },
-  duration: {
-    color: '#99a3a4',
-    fontSize: 12
-
-  },
-  icon: {
-    marginLeft: 'auto',
-  },
-});

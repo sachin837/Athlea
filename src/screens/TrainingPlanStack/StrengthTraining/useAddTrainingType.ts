@@ -1,7 +1,8 @@
 import { useCallback } from 'react'
 import { useNavigation } from '@react-navigation/native'
 import { RouteNames } from '../../../_constants'
-
+import Loading from '../../../assets/images/loading.svg';
+import User from '../../../assets/images/user.svg';
 
 export const useAddTrainingType = () => {
 
@@ -39,11 +40,19 @@ export const useAddTrainingType = () => {
     { id: '12', name: 'Strength training' },
   ];
 
+  const activities = [
+    { id: 1, title: 'Warm Up', description: 'Dynamic stretching', duration: '10 min', userImage: User, image: Loading },
+    { id: 2, title: 'Warm Up', description: 'Dynamic stretching', duration: '10 min', userImage: User, image: Loading },
+    { id: 3, title: 'Warm Up', description: 'Dynamic stretching', duration: '10 min', userImage: User, image: Loading },
+    { id: 4, title: 'Warm Up', description: 'Dynamic stretching', duration: '10 min', userImage: User, image: Loading },
+    { id: 5, title: 'Warm Up', description: 'Dynamic stretching', duration: '10 min', userImage: User, image: Loading },
+  ];
   return {
     onCreateNew,
     onSelectTraining,
     data,
     ManualEntry,
-    addNewActivity
+    addNewActivity,
+    activities
   }
 }

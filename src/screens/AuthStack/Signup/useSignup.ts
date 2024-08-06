@@ -69,7 +69,6 @@ export const useSignup = () => {
 
   const onSignIn = async () => {
     const {idToken} = await GoogleSignin.signIn()
-    console.log('idToken: ', idToken);
     const credentials = auth.GoogleAuthProvider.credential(idToken)
     await store.dispatch(onSignInWithCredential(credentials))
   }

@@ -11,10 +11,10 @@ export const HomeHeader = () => {
   return (
     <Container edges={['top']}>
       <View>
-        <Text type={'heading2'}>10k Plan</Text>
-        <Text type={'subBody'}>3/10 weeks</Text>
+        <Text type={'heading2'} themeColor={'subtitle'}>10k Plan</Text>
+        <Text type={'subBody'} themeColor={'subtitle'}>3/10 weeks</Text>
       </View>
-      <TouchableOpacity onPress={() => navigation.navigate(RouteNames.onboarding)}>
+      <TouchableOpacity onPress={() => navigation.navigate(RouteNames.settings)}>
         <Avatar source={require('assets/images/people/RandomImage1.png')}  />
       </TouchableOpacity>
     </Container>

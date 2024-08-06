@@ -52,8 +52,8 @@ export const SelectableText = styled(Text)<{selected: boolean}>`
 `
 
 export const Footer = styled.View`
-  padding: 12px 16px 24px;
   gap: 24px;
+  margin-top:15px;
 `
 
 export const styles = StyleSheet.create({

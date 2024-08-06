@@ -1,20 +1,22 @@
-import {Platform, StyleSheet} from 'react-native'
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
-import {useSafeAreaInsets} from 'react-native-safe-area-context'
-import {RouteNames} from '_constants'
-import {Feed, Home, Threads, Train} from 'screens'
+import { Platform, StyleSheet } from 'react-native'
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
+import { RouteNames } from '_constants'
+import { Feed, Home, Threads, Train } from 'screens'
 import TabBarIcon from '../components/TabBarIcon'
+import { useTheme } from 'styled-components/native'
 
 const Tabs = createBottomTabNavigator()
 
 export const TabNavigator = () => {
+  const theme = useTheme()
   const insets = useSafeAreaInsets()
   return (
     <Tabs.Navigator
-      screenOptions={({route}) => ({
+      screenOptions={({ route }) => ({
         headerShown: false,
         tabBarShowLabel: false,
-        tabBarStyle: [styles.tabBar, {paddingBottom: Platform.select({ios: insets.bottom, android: 16})}],
+        tabBarStyle: [styles.tabBar, { paddingBottom: Platform.select({ ios: insets.bottom, android: 16 }), backgroundColor: theme.pageBackground }],
         tabBarIcon: ({ focused }) => (
           <TabBarIcon focused={focused} route={route} />
         ),

@@ -34,14 +34,14 @@ export const AddSportType: FC<Props> = (props) => {
       <BackHeader title={'Add session'} />
       <ScrollView contentContainerStyle={styles.scrollContentContainer}>
         <TitleContainer>
-          <Text type={'heading2'} style={{ fontWeight: 'bold', color: 'black' }}>Sport type</Text>
+          <Text type={'heading2'} themeColor={'subtitle'} weight='bold'>Sport type</Text>
           <Text type={'subBody'} themeColor={'subtitle'}>
             What sport type session would you like to add?
           </Text>
         </TitleContainer>
         {sectionData.map((section) => (
           <SectionContainer>
-            <Text type={'subheading'} weight={'500'}>{section.title}</Text>
+            <Text type={'subheading'} weight={'500'} themeColor={'subtitle'}>{section.title}</Text>
             <SportContainer>
               {section.data.map((type, index) => {
                 const IconComponent = type.icon;
@@ -56,7 +56,7 @@ export const AddSportType: FC<Props> = (props) => {
                       fill='red'
                       stroke={isSelected(type.name) ? "#A0D911" : null}
                     />
-                    <SelectableText type={'subBody'} selected={isSelected(type.name)}>
+                    <SelectableText type={'subBody'} color='#ffff' selected={isSelected(type.name)}>
                       {type.name}
                     </SelectableText>
                   </SportItem>

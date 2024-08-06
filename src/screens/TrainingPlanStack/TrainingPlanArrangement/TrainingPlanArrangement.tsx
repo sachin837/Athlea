@@ -23,8 +23,8 @@ export const TrainingPlanArrangement = (props: any) => {
       <BackHeader title={'Rearrange workouts'} />
       <ScrollView contentContainerStyle={{ paddingBottom: bottom + 30 }}>
         <TitleContainer>
-          <Text type={'heading3'} style={{ fontWeight: 'bold', color:'black' }}>{props?.route?.params?.title}</Text>
-          <Text type={'subBody'} themeColor={'secondary'}>Drag workouts to change days. We recommend spacing out your workouts where possible</Text>
+          <Text type={'heading3'} themeColor={'subtitle'} weight='bold'>{props?.route?.params?.title}</Text>
+          <Text type={'subBody'} themeColor={'subtitle'}>Drag workouts to change days. We recommend spacing out your workouts where possible</Text>
         </TitleContainer>
         <WorkoutsRearrangeList data={data} />
       </ScrollView>

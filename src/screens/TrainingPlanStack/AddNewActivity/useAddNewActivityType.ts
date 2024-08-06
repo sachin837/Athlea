@@ -17,8 +17,8 @@ export const useAddTrainingType = () => {
   }, [])
 
 
-  const onSelectTraining = useCallback(() => {
-    navigation.navigate(RouteNames.selectActivityDate)
+  const EditActivity = useCallback(() => {
+    navigation.navigate(RouteNames.editActivity)
   }, [])
 
   const BodyPart = [
@@ -36,7 +36,7 @@ export const useAddTrainingType = () => {
   ];
   return {
     onCreateNew,
-    onSelectTraining,
+    EditActivity,
     BodyPart,
     ManualEntry,
     activities

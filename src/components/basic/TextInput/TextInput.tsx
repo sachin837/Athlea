@@ -28,13 +28,13 @@ export const TextInput:FC<TextInputProps> = (props) => {
     <MainContainer>
       {!!props.label && (
         <LabelContainer>
-          <Text type={'small'}>{props.label}</Text>
+          <Text type={'small'} themeColor={'subtitle'}>{props.label}</Text>
           {!!props.optionalLabel && (
-            <Text type={'small'} color={theme.black3}>({props.optionalLabel})</Text>
+            <Text type={'small'} themeColor={'subtitle'}>({props.optionalLabel})</Text>
           )}
         </LabelContainer>
       )}
-      <InputContainer focused={focused} error={!!props.errorText}>
+      <InputContainer focused={focused} error={!!props.errorText}  style={props?.inputContainer}>
         <StyledInput
           {...props}
           icon={!!props.icon}

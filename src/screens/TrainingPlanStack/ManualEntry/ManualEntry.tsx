@@ -1,15 +1,15 @@
-import { BackHeader, Text,Button } from '../../../components';
-import Icons from '../../../assets/icons/Icons';
+import { BackHeader, Text, Button, TextInput } from '../../../components';
 import {
-  MainContainer, styles, TitleContainer, SectionContainer, StarIcon, ItemContainer,
-  Footer, Label, StyledInput, InputContainer, InputWrapper, IconWrapper, DescriptionInput
+  MainContainer, styles, TitleContainer, SectionContainer, TextInputContainer, Row,
+  Footer,
 } from './ManualEntry.styles';
 import { ScrollView, FlatList, Alert } from 'react-native';
 import { useAddTrainingType } from './useAddTrainingType';
-import { View } from 'react-native-animatable';
+import { useTheme } from 'styled-components/native'
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export const ManualEntry = () => {
+  const theme = useTheme()
   const { data, ManualEntry } = useAddTrainingType();
 
   return (
@@ -19,64 +19,104 @@ export const ManualEntry = () => {
       />
       <ScrollView contentContainerStyle={styles.contentContainerStyle}>
         <TitleContainer>
-          <Text type={'heading2'} style={{ fontWeight: 'bold', color: 'black' }}>Manual entry</Text>
+          <Text type={'heading2'} weight={'bold'} themeColor={'subtitle'}>Manual entry</Text>
           <Text type={'subBody'} themeColor={'subtitle'}>Fill in session details</Text>
         </TitleContainer>
-        <SectionContainer style={{ backgroundColor: '#fff', padding: 10, borderRadius: 10, marginTop: 15 }}>
-          <InputContainer>
-            <Label>Name</Label>
-            <InputWrapper>
-              <StyledInput placeholder="Evening run" placeholderTextColor="#99a3a4" />
-            </InputWrapper>
-          </InputContainer>
+        <SectionContainer style={styles.SectionContainer}>
+          <TextInput
+            label={'Name'}
+            placeholder={'Evening run'}
+            // value={values.email}
+            // onChangeText={handleChange('email')}
+            // handleBlur={handleBlur('email')}
+            placeholderTextColor={theme.placeholder}
+            autoCapitalize="none"
+            keyboardType={'email-address'}
+            inputStyle={{ height: 50, }}
+            inputContainer={{ height: 50, }}
+          />
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <InputContainer style={{ flex: 1, marginRight: 10 }}>
-              <Label>Date</Label>
-              <InputWrapper>
-                <StyledInput placeholder="8 May 2024" placeholderTextColor="#99a3a4" />
-                <IconWrapper>
-                  <Icon name="calendar-today" size={15} color="#99a3a4" />
-                </IconWrapper>
-              </InputWrapper>
-            </InputContainer>
+          <Row>
+            <TextInputContainer>
+              <TextInput
+                label={'Date'}
+                placeholder={'8 May 2024'}
+                // value={values.email}
+                // onChangeText={handleChange('email')}
+                // handleBlur={handleBlur('email')}
+                placeholderTextColor={theme.placeholder}
+                autoCapitalize="none"
+                keyboardType={'email-address'}
+                inputStyle={{ height: 50, }}
+                inputContainer={{ height: 50, }}
+                icon={<Icon name="calendar-today" size={15} color="#99a3a4" />}
+              />
+            </TextInputContainer>
+            <TextInputContainer>
+              <TextInput
+                label={'Time'}
+                placeholder={'20:00'}
+                // value={values.email}
+                // onChangeText={handleChange('email')}
+                // handleBlur={handleBlur('email')}
+                placeholderTextColor={theme.placeholder}
+                autoCapitalize="none"
+                keyboardType={'email-address'}
+                inputStyle={{ height: 50 }}
+                inputContainer={{ height: 50 }}
+                icon={<Icon name="access-time" size={15} color="#99a3a4" />}
+              />
+            </TextInputContainer>
+          </Row>
 
-            <InputContainer style={{ flex: 1, marginLeft: 10 }}>
-              <Label>Time</Label>
-              <InputWrapper>
-                <StyledInput placeholder="20:00" placeholderTextColor="#99a3a4" />
-                <IconWrapper>
-                  <Icon name="access-time" size={15} color="#99a3a4" />
-                </IconWrapper>
-              </InputWrapper>
-            </InputContainer>
-          </View>
+          <Row>
+            <TextInputContainer>
+              <TextInput
+                label={'Duration'}
+                placeholder={'00:48:00'}
+                // value={values.email}
+                // onChangeText={handleChange('email')}
+                // handleBlur={handleBlur('email')}
+                placeholderTextColor={theme.placeholder}
+                autoCapitalize="none"
+                keyboardType={'email-address'}
+                inputStyle={{ height: 50, }}
+                inputContainer={{ height: 50, }}
+              />
+            </TextInputContainer>
+            <TextInputContainer>
+              <TextInput
+                label={'Intensity'}
+                placeholder={'Middle'}
+                // value={values.email}
+                // onChangeText={handleChange('email')}
+                // handleBlur={handleBlur('email')}
+                placeholderTextColor={theme.placeholder}
+                autoCapitalize="none"
+                keyboardType={'email-address'}
+                inputStyle={{ height: 50 }}
+                inputContainer={{ height: 50 }}
+              />
+            </TextInputContainer>
+          </Row>
 
-          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
-            <InputContainer style={{ flex: 1, marginRight: 10 }}>
-              <Label>Duration</Label>
-              <InputWrapper>
-                <StyledInput placeholder="00:48:00" placeholderTextColor="#99a3a4" />
-              </InputWrapper>
-            </InputContainer>
-
-            <InputContainer style={{ flex: 1, marginLeft: 10 }}>
-              <Label>Intensity</Label>
-              <InputWrapper>
-                <StyledInput placeholder="Middle" placeholderTextColor="#99a3a4" />
-              </InputWrapper>
-            </InputContainer>
-          </View>
-
-          <InputContainer>
-            <Label>Description</Label>
-            <DescriptionInput placeholder="Placeholder" placeholderTextColor="#99a3a4" multiline />
-          </InputContainer>
+          <TextInput
+            label={'Description'}
+            placeholder={'Description'}
+            // value={values.email}
+            // onChangeText={handleChange('email')}
+            // handleBlur={handleBlur('email')}
+            placeholderTextColor={theme.placeholder}
+            autoCapitalize="none"
+            keyboardType={'email-address'}
+            inputStyle={{ height: 50, }}
+            inputContainer={{ height: 50, }}
+          />
         </SectionContainer>
         <Footer>
           <Button
             text={'Continue'}
-            // onPress={console.log('sss')}
+          // onPress={console.log('sss')}
           />
         </Footer>
       </ScrollView>

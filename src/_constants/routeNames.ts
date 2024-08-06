@@ -26,8 +26,8 @@ export const RouteNames = {
   editActivity: 'EditActivity',
   selectActivityDate: 'SelectActivityDate',
   manualEntry: 'ManualEntry',
-  strengthTraining:'StrengthTraining'
-
-
-
+  strengthTraining:'StrengthTraining',
+  
+  chat: 'Chat',
+  stats: 'Stats',
 }

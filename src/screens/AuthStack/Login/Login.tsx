@@ -47,6 +47,7 @@ export const Login = () => {
       await store.dispatch(onSignInWithCredential(credentials))
       navigation.navigate(RouteNames.homeTabs)
     } catch (error) {
+      console.log('error:1111 ', error);
       switch (error.code) {
       case 'DEVELOPER_ERROR':
         console.error('Developer error, check your settings:', error)
@@ -121,6 +122,8 @@ export const Login = () => {
               placeholderTextColor={theme.placeholder}
               autoCapitalize="none"
               keyboardType={'email-address'}
+              inputStyle={{ height: 50, }}
+              inputContainer={{ height: 50, }}
             />
             <TextInput
               label={'Password'}
@@ -131,6 +134,8 @@ export const Login = () => {
               placeholderTextColor={theme.placeholder}
               autoCapitalize="none"
               password
+              inputStyle={{ height: 50, }}
+              inputContainer={{ height: 50, }}
             />
             <TouchableOpacity onPress={() => {}}>
               <Text style={{alignSelf: 'flex-end', color: '#F94A8C'}}>

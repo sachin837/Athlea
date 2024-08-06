@@ -1,8 +1,9 @@
-import Animated, {SharedValue, useAnimatedStyle, useSharedValue} from 'react-native-reanimated'
-import {StyleSheet} from 'react-native'
-import {FC, useEffect} from 'react'
-import {Colors} from '../../../../theme'
-import {Text} from '../../../primitives/Text'
+import Animated, { SharedValue, useAnimatedStyle, useSharedValue } from 'react-native-reanimated'
+import { StyleSheet } from 'react-native'
+import { FC, useEffect } from 'react'
+import { Colors } from '../../../../theme'
+import { Text } from '../../../primitives/Text'
+import { useTheme } from 'styled-components/native'
 
 
 interface Props {
@@ -12,8 +13,8 @@ interface Props {
   setAnimatedValues: (height: SharedValue<number>, position: SharedValue<number>) => void
 }
 
-export const AnimatedMainContainer:FC<Props> = (props) => {
-
+export const AnimatedMainContainer: FC<Props> = (props) => {
+  const theme = useTheme()
   const { height, position, title } = props
 
   const animatedHeight = useSharedValue(height)
@@ -26,7 +27,7 @@ export const AnimatedMainContainer:FC<Props> = (props) => {
   const animatedStyle = useAnimatedStyle(() => {
     return {
       height: animatedHeight?.value || 0,
-      transform: [{translateY: animatedPosition?.value || 0}],
+      transform: [{ translateY: animatedPosition?.value || 0 }],
       borderRadius: 8,
     }
   })
@@ -41,8 +42,8 @@ export const AnimatedMainContainer:FC<Props> = (props) => {
     <Animated.View
       style={[styles.main, animatedStyle]}
     >
-      <Text style={styles.textStyle}>{title}</Text>
-      <Animated.View style={[styles.container, containerStyle]} />
+      <Text style={styles.textStyle} themeColor={'subtitle'}>{title}</Text>
+      <Animated.View style={[styles.container, containerStyle, { backgroundColor: theme.background }]} />
     </Animated.View>
   )
 }
@@ -57,7 +58,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   container: {
-    backgroundColor: Colors.white,
     flex: 1,
     borderRadius: 16,
   },

@@ -1,10 +1,10 @@
 import React from 'react'
 import {StyleSheet, View} from 'react-native'
 import {Route} from '@react-navigation/native'
-import Icons from 'react-native-vector-icons/MaterialIcons'
 import { Text } from '../../components'
 import {RouteNames} from '_constants'
 import {Colors} from '../../theme'
+import {IconName, Icons} from '../../assets/icons'
 
 interface Props {
   route: Route<any>
@@ -13,31 +13,31 @@ interface Props {
 
 const TabBarIcon: React.FC<Props> = (props) => {
   const { focused, route } = props
-  let iconName = ''
+  let iconName:IconName = 'home02'
 
   const color = focused ? Colors.purple : Colors.black4
 
   switch (route.name) {
   case RouteNames.home: {
-    iconName = 'home'
+    iconName = 'home02'
   } break
 
   case RouteNames.train: {
-    iconName = 'train'
+    iconName = 'barGroup'
   } break
 
   case RouteNames.feed: {
-    iconName = 'feed'
+    iconName = 'columnHorizontal'
   } break
 
   case RouteNames.threads: {
-    iconName = 'list'
+    iconName = 'fileSearch'
   } break
   }
 
   return (
     <View style={styles.wrapper}>
-      <Icons name={iconName} color={color} size={24} />
+      <Icons name={iconName} color={color} />
       <Text type={'small'} bold={focused} color={color}>
         {route.name}
       </Text>

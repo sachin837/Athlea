@@ -1,11 +1,11 @@
-import {useState, FC} from 'react'
-import {TouchableOpacity, View} from 'react-native'
+import { useState, FC } from 'react'
+import { TouchableOpacity, View } from 'react-native'
 import Icons from 'react-native-vector-icons/Ionicons'
 import Collapsible from 'react-native-collapsible'
-import {Colors} from 'theme'
-import {TrainingNames, TrainingTypes} from '_constants'
-import {Text} from '../../primitives'
-import {Indicator} from '../../basic'
+import { Colors } from 'theme'
+import { TrainingNames, TrainingTypes } from '_constants'
+import { Text } from '../../primitives'
+import { Indicator } from '../../basic'
 import {
   Container,
   RowCenter,
@@ -38,7 +38,7 @@ interface Props {
   onPress?: () => void
 }
 
-export const PlanCard:FC<Props> = (props) => {
+export const PlanCard: FC<Props> = (props) => {
 
   const [isCollapsed, setIsCollapsed] = useState(true)
 
@@ -50,7 +50,7 @@ export const PlanCard:FC<Props> = (props) => {
       <RowSpace>
         <TouchableOpacity onPress={props.onPress}>
           <Row>
-            <Text type={'body'} bold>{props.title}</Text>
+            <Text type={'body'} themeColor={'subtitle'} bold>{props.title}</Text>
             <Icons name={'chevron-forward-outline'} size={18} color={Colors.black3} />
           </Row>
         </TouchableOpacity>
@@ -64,14 +64,14 @@ export const PlanCard:FC<Props> = (props) => {
         <TrainingDetails>
           {props.trainingResults.map((item, index) => (
             <TrainingDetailContainer key={index}>
-              <View style={{gap: 4}}>
+              <View style={{ gap: 4 }}>
                 <Row>
-                  <Icons name={'person-outline'} size={24} />
+                  <Icons name={'person-outline'} size={24} color={Colors.black3} />
                   <Text type={'body'} themeColor={item.category} bold>
                     {TrainingNames[item.category]}
                   </Text>
                 </Row>
-                <Text type={'small'} themeColor={'secondary'}>{item.date}</Text>
+                <Text type={'small'} themeColor={'subtitle'}>{item.date}</Text>
               </View>
               <RowSpace>
                 {item.measurements.map((measure, measureIndex) => (

@@ -2,14 +2,14 @@ import { BackHeader, Text, Button } from '../../../components';
 import {
   MainContainer, styles
 } from './StrengthTraining.styles';
-import { ScrollView, FlatList, Alert } from 'react-native';
+import { ScrollView } from 'react-native';
 import { useAddTrainingType } from './useAddTrainingType';
 import { View } from 'react-native-animatable';
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import TrainingCard from './Components/TrainingCard';
 import DateTimeCard from './Components/DateTimeCard';
 import ActivitiesCard from './Components/ActivitiesCard';
-import ChatBox from './Components/ChatBox';
+import ChatInput from '../../../components/basic/ChatInput/ChatInput';
+
 export const StrengthTraining = () => {
   const { data, ManualEntry } = useAddTrainingType();
 
@@ -22,7 +22,9 @@ export const StrengthTraining = () => {
         <TrainingCard />
         <DateTimeCard />
         <ActivitiesCard />
-        <ChatBox />
+        <View style={{ marginTop: 15 }}>
+          <ChatInput />
+        </View>
         <View style={{ marginTop: 20 }}>
           <Button
             text={'Save'}

@@ -13,10 +13,10 @@ export const Indicator:FC<Props> = (props) => {
 
   return (
     <View>
-      <Text type={'small'} color={'subtitle'}>{props.label}</Text>
+      <Text type={'small'} themeColor={'subtitle'}>{props.label}</Text>
       <View style={styles.row}>
-        <Text type={'heading3'}>{props.value}</Text>
-        <Text type={'tiny'} style={styles.measure}>
+        <Text type={'heading3'} themeColor={'subtitle'}>{props.value}</Text>
+        <Text type={'tiny'}  themeColor={'subtitle'} style={styles.measure}>
           {props.measure}
         </Text>
       </View>

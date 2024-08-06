@@ -5,7 +5,7 @@ export interface TextProps extends DefaultTextProps, StyledTextProps {
 }
 
 export interface StyledTextProps {
-    weight?: '500'
+    weight?: '300' | '400' | '500' | '600' | '700' | '800'
     color?: string
     themeColor?: string
     centered?: boolean
