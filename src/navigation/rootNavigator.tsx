@@ -61,9 +61,9 @@ export const RootNavigator = ({loginStatus}) => {
     <ThemeProvider theme={selectedTheme}>
       <NavigationContainer ref={tabNavigationRef}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          {/*{loginStatus !== 'authenticated' && (*/}
+          {loginStatus !== 'authenticated' && (
           <Stack.Screen name={RouteNames.authStack} component={AuthStack} />
-          {/*)}*/}
+          )}
 
           <Stack.Screen
             name={RouteNames.homeTabs}

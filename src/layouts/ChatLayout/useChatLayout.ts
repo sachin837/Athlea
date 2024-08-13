@@ -48,6 +48,7 @@ export const useChatLayout = () => {
     addAthleaMessage,
     inputType,
     setInputType,
+    microphoneVisible:true,
   }
 }
 

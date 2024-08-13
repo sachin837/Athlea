@@ -16,6 +16,7 @@ import { TouchableOpacity } from 'react-native'
 
 interface Props extends UseChatLayoutType {
   microphoneOpen:()=>void;
+  microphoneVisible:boolean;
 }
 
 export const ChatLayout:FC<Props> = (props) => {
@@ -29,8 +30,8 @@ export const ChatLayout:FC<Props> = (props) => {
         {...toolbarProps}
         containerStyle={styles.inputToolbar}
         renderActions={() => (
-          <TouchableOpacity style={styles.microphoneBtn} onPress={props.microphoneOpen}>
-              <Icons name={'microphone'} color={'black'} />
+          <TouchableOpacity disabled={!props.microphoneVisible} style={styles.microphoneBtn} onPress={props.microphoneOpen}>
+              {props.microphoneVisible && (<Icons name={'microphone'} color={'black'} />)}
           </TouchableOpacity>
         )}
       />

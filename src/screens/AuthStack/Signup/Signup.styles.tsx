@@ -1,5 +1,7 @@
 import styled, {css} from 'styled-components/native'
 import {SafeAreaView} from 'react-native-safe-area-context'
+import { StyleSheet } from 'react-native'
+import { Colors } from 'theme'
 
 export const StyledContainer = styled(SafeAreaView)`
   ${({theme: {space}}) => css`
@@ -67,3 +69,14 @@ export const SocialImage = styled.Image`
 export const InputContainer = styled.View`
   gap: 20px;
 `
+export const styles = StyleSheet.create({
+  emailInput:{
+    color: Colors.black1,
+  },
+  passwordInput:{
+    color: Colors.black1,
+  },
+  repeatPasswordInput:{
+    color: Colors.black1,
+  },
+})
