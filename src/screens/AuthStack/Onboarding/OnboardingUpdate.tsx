@@ -10,6 +10,8 @@ export const OnboardingUpdate = () => {
   return (
     <View style={{flex: 1}}>
       <ChatLayout
+        microphoneOpen={()=>{}}
+        microphoneVisible={false}
         {...chatLayoutProps}
         onSend={onUserInput}
       />

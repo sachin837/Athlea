@@ -9,6 +9,7 @@ import {
   SocialButtonContainer,
   LogoContainer,
   InputContainer,
+  styles,
 } from './Signup.styles'
 import {Colors} from 'theme'
 import {Button, Divider, Text, TextInput} from 'components'
@@ -19,7 +20,8 @@ import {useTheme} from 'styled-components/native'
 import {RouteNames} from '../../../_constants'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller'
 
-export const Signup = ({navigation}) => {
+export const Signup = ({navigation, errorMessage, isSubmitPress}) => {
+  console.log("🚀 ~ Signup ~ errorMessage:", errorMessage)
   const theme = useTheme()
   const {formik, onSignIn} = useSignup()
   const {handleSubmit, handleChange, values, handleBlur} = formik
@@ -57,38 +59,42 @@ export const Signup = ({navigation}) => {
           <InputContainer>
             <TextInput
               label={'Email'}
-              placeholder={'Name'}
+              placeholder={'Email'}
               placeholderTextColor={theme.placeholder}
               value={values.email}
+              errorText={errorMessage?.email}
               onChangeText={handleChange('email')}
               handleBlur={handleBlur('email')}
+              inputStyle={styles.emailInput}
               autoCapitalize="none"
             />
             <TextInput
               label={'Password'}
-              placeholder={'Email'}
+              placeholder={'Password'}
               value={values.password}
               onChangeText={handleChange('password')}
               handleBlur={handleBlur('password')}
               placeholderTextColor={theme.placeholder}
               autoCapitalize="none"
+              inputStyle={styles.passwordInput}
               password
             />
             <TextInput
               label={'Repeat password'}
-              placeholder={'Password'}
+              placeholder={'Repeat password'}
               value={values.repeatPassword}
-              handleChange={handleChange('repeatPassword')}
+              onChangeText={handleChange('repeatPassword')}
               handleBlur={handleBlur('repeatPassword')}
               placeholderTextColor={Colors.black4}
               autoCapitalize="none"
+              inputStyle={styles.repeatPasswordInput}
               password
             />
           </InputContainer>
         </MiddleContainer>
 
         <BottomContainer>
-          <Button text={'Sign Up'} onPress={handleSubmit} />
+          <Button loading={isSubmitPress} text={'Sign Up'} onPress={handleSubmit} />
           <Text themeColor={'primary'} centered>
           Already have an account?
             <Text themeColor={'subtitle'} onPress={() => navigation.navigate(RouteNames.login)}> Sign In</Text>

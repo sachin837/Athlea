@@ -11,12 +11,15 @@ import {RouteNames, ValidationSchemes} from '../../../_constants'
 export const useSignup = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
+  const [isSubmitPress, setIsSubmitPress] = useState<Boolean>(false)
   const [errorMessage, setErrorMessage] = useState<{
     email: Email;
     password: Password;
+    repeatPassword: Password;
   }>({
     email: '',
     password: '',
+    repeatPassword: '',
   })
   const {authenticationLoading} = useAppSelector(state => state.auth)
 
@@ -39,19 +42,30 @@ export const useSignup = () => {
   }
 
   const onSubmit = async (data: DataTypes) => {
-    const resultAction = await dispatch(onSignUp(data))
-    if (onSignUp.fulfilled.match(resultAction)) {
-      navigation.navigate(RouteNames.onboarding)
-    } else {
-      signUpErrorHandeling(resultAction.payload, data.email)
-    }
+    setIsSubmitPress(true)
+    dispatch(onSignUp(data))
+      .then(response => {
+        const result = response as any
+        if (onSignUp.fulfilled.match(result)) {
+          navigation.replace(RouteNames.onboarding)
+        } else {
+          signUpErrorHandeling(result.payload, data.email)
+        }
+      })
+      .catch(error => {
+        signUpErrorHandeling(error.payload, data.email)
+      })
+      .finally(() => {
+        setIsSubmitPress(false)
+      })
   }
 
   const onValidate = () => {
-    if (errorMessage?.email !== '' || errorMessage?.password !== '') {
+    if (errorMessage?.email !== '' || errorMessage?.password !== '' || errorMessage?.repeatPassword !== '') {
       setErrorMessage({
         email: '',
         password: '',
+        repeatPassword: '',
       })
     }
   }
@@ -63,6 +77,7 @@ export const useSignup = () => {
     initialErrors: {
       email: errorMessage.email,
       password: errorMessage.password,
+      repeatPassword: errorMessage.repeatPassword,
     },
     onSubmit: data => onSubmit(data),
   })
@@ -76,5 +91,7 @@ export const useSignup = () => {
   return {
     formik,
     onSignIn,
+    errorMessage,
+    isSubmitPress,
   }
 }

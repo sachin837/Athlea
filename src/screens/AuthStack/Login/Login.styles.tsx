@@ -1,5 +1,7 @@
 import styled, {css, DefaultTheme} from 'styled-components/native'
 import {SafeAreaView} from 'react-native-safe-area-context'
+import { Colors } from 'theme'
+import { StyleSheet } from 'react-native'
 
 export const StyledContainer = styled(SafeAreaView)`
   ${({theme: {space}}) => css`
@@ -84,3 +86,11 @@ export const LogoContainer = styled.View`
   align-items: center;
   gap: 6px;
 `
+export const styles = StyleSheet.create({
+  emailInput:{
+    color: Colors.black1,
+  },
+  passwordInput:{
+    color: Colors.black1,
+  },
+})

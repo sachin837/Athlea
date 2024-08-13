@@ -13,6 +13,7 @@ import {
   SocialButton,
   SocialButtonContainer,
   SocialImage,
+  styles,
 } from './Login.styles'
 import {RouteNames} from '_constants'
 import {onSignInWithCredential, store} from 'store'
@@ -43,9 +44,7 @@ export const Login = () => {
     try {
       await GoogleSignin.hasPlayServices()
       const {idToken} = await GoogleSignin.signIn()
-      console.log('idToken: ', idToken);
       const credentials = auth.GoogleAuthProvider.credential(idToken)
-      console.log('credentials: ', credentials);
       await store.dispatch(onSignInWithCredential(credentials))
       navigation.navigate(RouteNames.homeTabs)
     } catch (error) {
@@ -123,6 +122,7 @@ export const Login = () => {
               placeholderTextColor={theme.placeholder}
               autoCapitalize="none"
               keyboardType={'email-address'}
+              inputStyle={styles.emailInput}
             />
             <TextInput
               label={'Password'}
@@ -131,6 +131,7 @@ export const Login = () => {
               onChangeText={handleChange('password')}
               handleBlur={handleBlur('password')}
               placeholderTextColor={theme.placeholder}
+              inputStyle={styles.passwordInput}
               autoCapitalize="none"
               password
             />
@@ -150,7 +151,7 @@ export const Login = () => {
           />
           <Text themeColor={'primary'} centered>
             Don't have account yet?
-            <Text themeColor={'subtitle'} onPress={() => navigation.navigate(RouteNames.login)}> Sign up</Text>
+            <Text themeColor={'subtitle'} onPress={() => navigation.navigate(RouteNames.signup)}> Sign up</Text>
           </Text>
           <Text type={'tiny'} themeColor={'subtitle'} centered>
             By continuing you accept our Privacy Policy and Term of Use

@@ -9,6 +9,8 @@ import { ListContainer, Subtitle, Username, BackButton } from './Settings.style'
 import { useNavigation } from '@react-navigation/native';
 import {useTheme} from 'styled-components/native'
 import { useThemes } from "../../../contexts/ThemeContext";
+import { onSignOut, useAppDispatch } from 'store';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export const Settings = () => {
   const theme = useTheme()
@@ -26,7 +28,8 @@ export const Settings = () => {
   };
 
   const name = 'michwilf';
-  const navigation = useNavigation();
+  const navigation = useNavigation()
+  const dispatch = useAppDispatch()
 
   const accountSettingsConfig = useMemo(() => ([
     { title: 'Edit profile', onPress: () => navigation.navigate(RouteNames.editProfile) },
@@ -42,7 +45,13 @@ export const Settings = () => {
     { title: 'Terms and conditions', onPress: () => { } },
     { title: 'Give Feedback', onPress: () => { } },
   ]), []);
-
+  const signOut = async () => {
+    const resultAction = await dispatch(onSignOut())
+    if (onSignOut.fulfilled.match(resultAction)) {
+      await AsyncStorage.clear();
+      // navigation.navigate(RouteNames.authStack)
+    }
+  }
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: theme.pageBackground }}>
       <ScrollView>
@@ -57,7 +66,7 @@ export const Settings = () => {
             />
             <View style={{ marginLeft: 8 }}>
               <Username>{name}</Username>
-              <TouchableOpacity onPress={() => { }}>
+              <TouchableOpacity onPress={signOut}>
                 <Text style={{ fontSize: 14, color: 'red' }}>Sign out</Text>
               </TouchableOpacity>
             </View>
