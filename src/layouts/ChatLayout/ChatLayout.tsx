@@ -13,6 +13,7 @@ import type {Message as CustomMessage} from 'model/chat'
 import {MainContainer, styles} from './ChatLayout.styled'
 import {InputTypes, UseChatLayoutType} from './useChatLayout'
 import { TouchableOpacity } from 'react-native'
+import { Colors } from 'theme'
 
 interface Props extends UseChatLayoutType {
   microphoneOpen:()=>void;
@@ -26,15 +27,21 @@ export const ChatLayout:FC<Props> = (props) => {
   ), [])
 
   const renderInputToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (
-      <InputToolbar
-        {...toolbarProps}
-        containerStyle={styles.inputToolbar}
-        renderActions={() => (
-          <TouchableOpacity disabled={!props.microphoneVisible} style={styles.microphoneBtn} onPress={props.microphoneOpen}>
-              {props.microphoneVisible && (<Icons name={'microphone'} color={'black'} />)}
-          </TouchableOpacity>
-        )}
-      />
+    <InputToolbar
+      {...toolbarProps}
+      containerStyle={styles.inputToolbar}
+      {
+        ...(props.microphoneVisible
+          ? {
+            renderActions: () => (
+              <TouchableOpacity style={styles.microphoneBtn} onPress={props.microphoneOpen}>
+                <Icons name={'microphone'} color={'black'} />
+              </TouchableOpacity>
+            ),
+          }
+          : {})
+      }
+    />
   ),[])
 
   const renderConfirmToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (
@@ -73,7 +80,7 @@ export const ChatLayout:FC<Props> = (props) => {
           listViewProps={{
             contentContainerStyle: styles.messagesContainer,
           }}
-          textInputProps={{placeholder: 'Tell Athlea your goal...'}}
+          textInputProps={{placeholder: 'Tell Athlea your goal...',color:Colors.black1}}
         />
       </SafeAreaView>
     </MainContainer>

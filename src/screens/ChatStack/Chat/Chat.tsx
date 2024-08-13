@@ -53,7 +53,7 @@ export const Chat = () => {
           <Text size={22} color={Colors.black1}>athlea</Text>
           <Icons name={'share'} size={24} color={Colors.black4} />
         </Header>
-        <ChatLayout {...chatLayoutProps} microphoneOpen={openMicSheet} />
+        <ChatLayout {...chatLayoutProps} microphoneOpen={openMicSheet} microphoneVisible={true} />
       </MainContainer>
       <BottomSheet
         index={-1}
