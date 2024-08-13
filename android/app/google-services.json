@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "422028132636",
+    "firebase_url": "https://athlea-dc449-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "athlea-dc449",
+    "storage_bucket": "athlea-dc449.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:422028132636:android:6165e8bfe8e0d425457ad9",
+        "android_client_info": {
+          "package_name": "com.athlea"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "422028132636-6ka03mii9cc0je3k0u60224ggbah9fec.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.athlea",
+            "certificate_hash": "daf4c5ecd5f90a9b075b56c7cfb87cf93c60b23a"
+          }
+        },
+        {
+          "client_id": "422028132636-emt4jgpt5ge9fdn15ddonb7nt9m9948t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.athlea",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "422028132636-s4gsjrpsmp1n54d6ac2rm6utbm6ce4v4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn-HCZj3SzAl-9bMwdkSsoudwKRN86m_s"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "422028132636-i3tklcb4as1ll8nave02l3qi84onqcjd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "422028132636-hde6faeefdd3cu3mulm54mt1alb43j9l.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ai.athlea"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
