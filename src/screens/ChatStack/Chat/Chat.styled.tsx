@@ -7,6 +7,7 @@ export const MainContainer = styled(SafeAreaView)`
   ${({ theme }) => css`
     flex: 1;
     justify-content: space-between;
+    
   `}
 `
 
@@ -17,8 +18,19 @@ export const Footer = styled.View`
     padding: 0 53px;
 `
 
-export const Header = styled.View`
+export const SheetHeader = styled.View`
+    ${({ theme }) => css`
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px;
+        border-color: ${theme.divider};
+    `}
+`
+export const SheetFooter = styled.View`
+    flex-direction: row;
+    justify-content: space-between;
     align-items: center;
+    padding: 0 53px 25px;
 `
 
 export const MicrophoneContainer = styled.TouchableOpacity`
@@ -31,7 +43,7 @@ export const MicrophoneContainer = styled.TouchableOpacity`
     `}
 `
 
-export const SheetHeader = styled.View`
+export const Header = styled.View`
     ${({ theme }) => css`
         justify-content: space-between;
         align-items: center;
@@ -45,6 +57,7 @@ export const SheetHeader = styled.View`
 export const SheetContainer = styled.View`
     ${({ theme }) => css`
         flex: 1;
+        justify-content: space-between;
     `}
 `
 

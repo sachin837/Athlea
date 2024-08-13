@@ -43,7 +43,9 @@ export const Login = () => {
     try {
       await GoogleSignin.hasPlayServices()
       const {idToken} = await GoogleSignin.signIn()
+      console.log('idToken: ', idToken);
       const credentials = auth.GoogleAuthProvider.credential(idToken)
+      console.log('credentials: ', credentials);
       await store.dispatch(onSignInWithCredential(credentials))
       navigation.navigate(RouteNames.homeTabs)
     } catch (error) {

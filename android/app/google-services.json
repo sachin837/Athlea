@@ -23,6 +23,14 @@
           }
         },
         {
+          "client_id": "422028132636-emt4jgpt5ge9fdn15ddonb7nt9m9948t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.athlea",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
           "client_id": "422028132636-s4gsjrpsmp1n54d6ac2rm6utbm6ce4v4.apps.googleusercontent.com",
           "client_type": 3
         }
@@ -40,10 +48,10 @@
               "client_type": 3
             },
             {
-              "client_id": "422028132636-hg3ob8j41rjsdtovh5lqhvhq3s44950r.apps.googleusercontent.com",
+              "client_id": "422028132636-hde6faeefdd3cu3mulm54mt1alb43j9l.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "com.athlea.athleaexpo"
+                "bundle_id": "ai.athlea"
               }
             }
           ]

@@ -2,6 +2,7 @@ import {useCallback, useEffect, useRef, useState} from 'react'
 import type BottomSheet from '@gorhom/bottom-sheet'
 import {useChatLayout} from '../../layouts'
 import avatar from '../../assets/images/ChatLogo.png'
+import { useNavigation } from '@react-navigation/native'
 
 
 export const useChat = () => {
@@ -12,9 +13,13 @@ export const useChat = () => {
 
   const chatLayoutProps = useChatLayout()
 
-  const openChatSheet = useCallback(() => chatSheetRef.current?.expand(), [])
+  const openMicSheet = useCallback(() => chatSheetRef.current?.expand(), [])
 
-  const closeChatSheet = useCallback(() => chatSheetRef.current?.close(), [])
+  const closeMicSheet = useCallback(() => chatSheetRef.current?.close(), [])
+
+  const navigation = useNavigation();
+
+  const backToHome = () => navigation.goBack();
 
   useEffect(() => {
     chatLayoutProps.setMessages([
@@ -83,8 +88,9 @@ export const useChat = () => {
   return {
     chatSheetRef,
     snapPoints,
-    openChatSheet,
-    closeChatSheet,
+    openMicSheet,
+    closeMicSheet,
     chatLayoutProps,
+    backToHome,
   }
 }

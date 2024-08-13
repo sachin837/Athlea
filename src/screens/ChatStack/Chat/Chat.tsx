@@ -8,6 +8,7 @@ import {
   MicrophoneContainer,
   AIContainer,
   AIButton,
+  SheetFooter,
 } from './Chat.styled';
 import {Text} from '../../../components';
 import {ChatLayout} from '../../../layouts';
@@ -24,9 +25,10 @@ export const Chat = () => {
   const {
     chatSheetRef,
     snapPoints,
-    closeChatSheet,
-    openChatSheet,
+    closeMicSheet,
+    openMicSheet,
     chatLayoutProps,
+    backToHome,
   } = useChat();
 
   const aiButtons = useMemo(
@@ -44,7 +46,25 @@ export const Chat = () => {
   return (
     <>
       <MainContainer>
-        <Header>
+        <Header> 
+          <TouchableOpacity onPress={backToHome}>
+            <Icons name={'cross'} size={24} color={Colors.black4} />
+          </TouchableOpacity>
+          <Text size={22} color={Colors.black1}>athlea</Text>
+          <Icons name={'share'} size={24} color={Colors.black4} />
+        </Header>
+        <ChatLayout {...chatLayoutProps} microphoneOpen={openMicSheet} />
+      </MainContainer>
+      <BottomSheet
+        index={-1}
+        ref={chatSheetRef}
+        enablePanDownToClose
+        topInset={insets.top}
+        snapPoints={snapPoints}
+        handleComponent={() => null}>
+        <SheetContainer>
+          
+          <SheetHeader>
           <Text size={22} weight={'300'} centered>
             athlea
           </Text>
@@ -59,38 +79,21 @@ export const Chat = () => {
             </TouchableOpacity>
           </AIContainer>
           <Image
-            source={require('../../../assets/images/VoiceActive.png')}
+            source={require('../../../assets/images/mic_effect.png')}
             style={{width: 240, height: 230, marginTop: 40}}
           />
-        </Header>
-        <Footer>
-          <TouchableOpacity onPress={openChatSheet}>
+        </SheetHeader>
+        <SheetFooter>
+          <TouchableOpacity onPress={closeMicSheet}>
             <Icons name={'messageCircle'} size={28} />
           </TouchableOpacity>
-          <MicrophoneContainer onPress={openChatSheet}>
+          <MicrophoneContainer onPress={openMicSheet}>
             <Icons name={'microphone'} color={'white'} size={28} />
           </MicrophoneContainer>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={closeMicSheet}>
             <Icons name={'cross'} size={28} />
           </TouchableOpacity>
-        </Footer>
-      </MainContainer>
-      <BottomSheet
-        index={-1}
-        ref={chatSheetRef}
-        enablePanDownToClose
-        topInset={insets.top}
-        snapPoints={snapPoints}
-        handleComponent={() => null}>
-        <SheetContainer>
-          <SheetHeader>
-            <TouchableOpacity onPress={closeChatSheet}>
-              <Icons name={'cross'} size={24} color={Colors.black4} />
-            </TouchableOpacity>
-            <Text size={22}>athlea</Text>
-            <Icons name={'share'} size={24} color={Colors.black4} />
-          </SheetHeader>
-          <ChatLayout {...chatLayoutProps} />
+        </SheetFooter>
         </SheetContainer>
       </BottomSheet>
     </>

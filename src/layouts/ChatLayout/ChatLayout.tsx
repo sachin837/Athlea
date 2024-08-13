@@ -12,8 +12,11 @@ import {Icons} from '../../assets/icons'
 import type {Message as CustomMessage} from 'model/chat'
 import {MainContainer, styles} from './ChatLayout.styled'
 import {InputTypes, UseChatLayoutType} from './useChatLayout'
+import { TouchableOpacity } from 'react-native'
 
-interface Props extends UseChatLayoutType {}
+interface Props extends UseChatLayoutType {
+  microphoneOpen:()=>void;
+}
 
 export const ChatLayout:FC<Props> = (props) => {
 
@@ -22,12 +25,15 @@ export const ChatLayout:FC<Props> = (props) => {
   ), [])
 
   const renderInputToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (
-    <SafeAreaView edges={['bottom']}>
       <InputToolbar
         {...toolbarProps}
         containerStyle={styles.inputToolbar}
+        renderActions={() => (
+          <TouchableOpacity style={styles.microphoneBtn} onPress={props.microphoneOpen}>
+              <Icons name={'microphone'} color={'black'} />
+          </TouchableOpacity>
+        )}
       />
-    </SafeAreaView>
   ),[])
 
   const renderConfirmToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (

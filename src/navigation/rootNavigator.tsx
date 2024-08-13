@@ -62,7 +62,7 @@ export const RootNavigator = ({loginStatus}) => {
       <NavigationContainer ref={tabNavigationRef}>
         <Stack.Navigator screenOptions={{headerShown: false}}>
           {/*{loginStatus !== 'authenticated' && (*/}
-          {/* <Stack.Screen name={RouteNames.authStack} component={AuthStack} /> */}
+          <Stack.Screen name={RouteNames.authStack} component={AuthStack} />
           {/*)}*/}
 
           <Stack.Screen

@@ -18,9 +18,18 @@ export const styles = StyleSheet.create({
     borderRadius: 12,
     alignItems: 'center',
     flexDirection: 'row',
+    marginBottom:20
   },
   send: {
     backgroundColor: Colors.purple,
+    margin: 8,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: 40,
+    height: 40,
+    borderRadius: 8,
+  },
+  microphoneBtn: {
     margin: 8,
     alignItems: 'center',
     justifyContent: 'center',
