@@ -89,7 +89,8 @@ export const onUpdatePassword = createAsyncThunk(
 
 export const onResetPassword = createAsyncThunk(
   'auth/resetPassword',
-  async (_, {rejectWithValue}) => {
+  async (inputValues: AuthUserInput, {rejectWithValue}) => {
+    const {email} = inputValues
     try {
       const response = await AuthenticationService.resetPassword(email)
       return response

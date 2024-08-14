@@ -43,8 +43,8 @@ const updatePassword = async (password: string): Promise<void | unknown> =>
 const updateEmail = async (email: string): Promise<void | unknown> =>
   await auth().currentUser?.verifyBeforeUpdateEmail(email)
 
-const resetPassword = async (): Promise<void> => {
-  const email = auth()?.currentUser?.email as string
+const resetPassword = async (email: string): Promise<void> => {
+  // const email = auth()?.currentUser?.email as string
   return await auth().sendPasswordResetEmail(email)
 }
 
