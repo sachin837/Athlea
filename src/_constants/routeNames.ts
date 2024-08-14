@@ -15,6 +15,7 @@ export const RouteNames = {
   signup: 'Signup',
   onboarding: 'Onboarding',
   start: 'Start',
+  forgotPassword: 'ForgotPassword',
 
   trainingPlanArrangement: 'TrainingPlanArrangement',
 

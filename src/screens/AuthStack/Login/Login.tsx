@@ -24,6 +24,7 @@ import Icons from '../../../assets/icons/Icons'
 import {Images} from '../../../assets/images'
 import {TouchableOpacity} from 'react-native'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller'
+import { Colors } from 'theme'
 
 type LoginViewProps = {
   formik: FormikTypes; // You can use a more specific type if you know the exact structure of the formik object.
@@ -94,7 +95,7 @@ export const Login = () => {
             athlea
             </Text>
           </LogoContainer>
-          <Text type={'heading1'}>Welcome Back</Text>
+          <Text type={'heading1'} color={Colors.black1}>Welcome Back</Text>
         </TopContainer>
 
         <MiddleContainer>
@@ -135,7 +136,7 @@ export const Login = () => {
               autoCapitalize="none"
               password
             />
-            <TouchableOpacity onPress={() => {}}>
+            <TouchableOpacity onPress={() => navigation.navigate(RouteNames.forgotPassword)}>
               <Text style={{alignSelf: 'flex-end', color: '#F94A8C'}}>
               Forgot password?
               </Text>

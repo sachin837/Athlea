@@ -20,10 +20,9 @@ import {useTheme} from 'styled-components/native'
 import {RouteNames} from '../../../_constants'
 import {KeyboardAwareScrollView} from 'react-native-keyboard-controller'
 
-export const Signup = ({navigation, errorMessage, isSubmitPress}) => {
-  console.log("🚀 ~ Signup ~ errorMessage:", errorMessage)
+export const Signup = ({navigation}:any) => {
   const theme = useTheme()
-  const {formik, onSignIn} = useSignup()
+  const {formik, onSignIn, errorMessage, isSubmitPress} = useSignup()
   const {handleSubmit, handleChange, values, handleBlur} = formik
 
   return (
@@ -38,7 +37,7 @@ export const Signup = ({navigation, errorMessage, isSubmitPress}) => {
             <Icons name={'ai'} color={theme.brand} size={20} />
             <Text type={'heading2'} themeColor={'brand'}>athlea</Text>
           </LogoContainer>
-          <Text type={'heading1'}>Create Account</Text>
+          <Text type={'heading1'} color={Colors.black1}>Create Account</Text>
         </TopContainer>
 
         <MiddleContainer>
@@ -72,6 +71,7 @@ export const Signup = ({navigation, errorMessage, isSubmitPress}) => {
               label={'Password'}
               placeholder={'Password'}
               value={values.password}
+              errorText={errorMessage?.password}
               onChangeText={handleChange('password')}
               handleBlur={handleBlur('password')}
               placeholderTextColor={theme.placeholder}
@@ -83,6 +83,7 @@ export const Signup = ({navigation, errorMessage, isSubmitPress}) => {
               label={'Repeat password'}
               placeholder={'Repeat password'}
               value={values.repeatPassword}
+              errorText={errorMessage?.repeatPassword}
               onChangeText={handleChange('repeatPassword')}
               handleBlur={handleBlur('repeatPassword')}
               placeholderTextColor={Colors.black4}
