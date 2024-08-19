@@ -80,7 +80,7 @@ export const useSignup = () => {
         .then(response => {
           const result = response as any
           if (onSignUp.fulfilled.match(result)) {
-            navigation.replace(RouteNames.onboarding)
+            navigation.navigate(RouteNames.onboarding)
           } else {
             signUpErrorHandeling(result.payload, data.email)
           }

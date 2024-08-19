@@ -12,6 +12,7 @@ export const useForgotPassword = () => {
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
   const [isSubmitPress, setIsSubmitPress] = useState<Boolean>(false)
+  const [isResendPress, setIsResendPress] = useState<Boolean>(false)
   const [errorMessage, setErrorMessage] = useState<DataTypes>({
     email: '',
   })
@@ -21,7 +22,6 @@ export const useForgotPassword = () => {
     errorResponse: AuthErrorResponse,
     email: string,
   ) => {
-    console.log('🚀 ~ useForgotPassword ~ errorResponse:', errorResponse)
     if (errorResponse?.code === 'auth/email-already-in-use') {
       // navigation.navigate('AccountError', {
       //   errorStatus: 'accountExist',
@@ -43,7 +43,7 @@ export const useForgotPassword = () => {
         const result = response as any
         if (onResetPassword.fulfilled.match(result)) {
           Alert.alert('', 'Password reset link has been sent to your email.', [
-            {text: 'OK', onPress: () => navigation.navigate(RouteNames.login)},
+            {text: 'OK'},
           ])
         } else {
           forgotPasswordErrorHandeling(result.payload, data.email)
@@ -56,7 +56,27 @@ export const useForgotPassword = () => {
         setIsSubmitPress(false)
       })
   }
-
+  const onResend = async (data: DataTypes) => {
+    if (!data.email) {return}
+    setIsResendPress(true)
+    dispatch(onResetPassword(data))
+      .then(response => {
+        const result = response as any
+        if (onResetPassword.fulfilled.match(result)) {
+          Alert.alert('', 'Password reset link has been re-sent to your email.', [
+            {text: 'OK'},
+          ])
+        } else {
+          forgotPasswordErrorHandeling(result.payload, data.email)
+        }
+      })
+      .catch(error => {
+        forgotPasswordErrorHandeling(error.payload, data.email)
+      })
+      .finally(() => {
+        setIsResendPress(false)
+      })
+  }
   const onValidate = (values:DataTypes) => {
     const errors: DataTypes = errorMessage
     let result = true
@@ -82,10 +102,12 @@ export const useForgotPassword = () => {
       email: errorMessage.email,
     },
     onSubmit: data => onSubmit(data),
+    onReset: data => onResend(data),
   })
   return {
     formik,
     errorMessage,
     isSubmitPress,
+    isResendPress,
   }
 }

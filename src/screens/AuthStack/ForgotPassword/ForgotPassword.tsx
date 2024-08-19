@@ -18,8 +18,8 @@ import { RouteNames } from '_constants'
 
 export const ForgotPassword = ({navigation}: any) => {
   const theme = useTheme()
-  const {formik, errorMessage, isSubmitPress} = useForgotPassword()
-  const {handleSubmit, handleChange, values, handleBlur} = formik
+  const {formik, errorMessage, isSubmitPress, isResendPress} = useForgotPassword()
+  const {handleSubmit, handleChange, values, handleBlur, handleReset} = formik
 
   return (
     <KeyboardAwareScrollView
@@ -55,11 +55,13 @@ export const ForgotPassword = ({navigation}: any) => {
           </InputContainer>
           <BottomContainer>
             <Button
-              loading={isSubmitPress}
+              disabled={values.email.length === 0}
+              loading={!isResendPress && isSubmitPress}
               text={'Reset Password'}
               onPress={handleSubmit}
             />
 
+            <Text centered disabled={values.email.length === 0} themeColor={'subtitle2'} color={Colors.purple} onPress={handleReset}> Resend</Text>
             <Text centered themeColor={'subtitle'} onPress={() => navigation.navigate(RouteNames.login)}> Back to Login</Text>
           </BottomContainer>
         </MiddleContainer>
