@@ -53,7 +53,7 @@ export const Signup = ({navigation}:any) => {
             </SocialButton>
           </SocialButtonContainer>
           <Divider>
-            <Text type={'subBody'}>or</Text>
+            <Text color={Colors.black1} type={'subBody'}>or</Text>
           </Divider>
           <InputContainer>
             <TextInput

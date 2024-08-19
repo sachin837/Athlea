@@ -1,5 +1,5 @@
 import React, { FC, useMemo, useContext, useState, useEffect } from 'react';
-import { ScrollView, Text, TouchableOpacity, View } from 'react-native';
+import { DevSettings, ScrollView, Text, TouchableOpacity, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Switch } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Ionicons'
@@ -50,6 +50,8 @@ export const Settings = () => {
     if (onSignOut.fulfilled.match(resultAction)) {
       await AsyncStorage.clear();
       // navigation.navigate(RouteNames.authStack)
+      DevSettings.reload()
+      
     }
   }
   return (

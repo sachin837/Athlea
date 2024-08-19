@@ -11,6 +11,7 @@ import {
 import {TextInputProps} from './type'
 import Icons from 'react-native-vector-icons/MaterialIcons'
 import {TouchableOpacity} from 'react-native'
+import { Colors } from 'theme'
 
 
 export const TextInput:FC<TextInputProps> = (props) => {
@@ -46,7 +47,7 @@ export const TextInput:FC<TextInputProps> = (props) => {
         <IconContainer>{props.icon}</IconContainer>
         {props.password && (
           <TouchableOpacity onPress={togglePasswordVisibility}>
-            <Icons name={passwordVisible ? 'visibility' : 'visibility-off'} size={20} />
+            <Icons name={passwordVisible ? 'visibility' : 'visibility-off'} color={Colors.black1} size={20} />
           </TouchableOpacity>
         )}
       </InputContainer>
