@@ -26,20 +26,22 @@ export const MessageBubble:FC<Props> = (props) => {
       {...props}
       wrapperStyle={{
         left: {
-          borderRadius: 12,
+          borderRadius: 8,
           borderBottomLeftRadius: 4,
           backgroundColor: theme.messageLeftBubble,
           borderWidth: 1,
           borderColor: theme.messageLeftBorder,
-          padding: 6,
+          margin: -6,
+          padding:2,
+          marginLeft:2,
         },
         right: {
-          borderRadius: 12,
+          borderRadius: 8,
           borderBottomRightRadius: 4,
           backgroundColor: theme.messageRightBubble,
           borderWidth: 1,
           borderColor: theme.messageRightBubble,
-          padding: 6,
+          padding:4,
         },
       }}
       renderTime={() => null}
