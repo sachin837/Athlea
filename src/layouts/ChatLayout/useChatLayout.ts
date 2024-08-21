@@ -2,7 +2,7 @@ import {useCallback, useEffect, useState} from 'react'
 import {GiftedChat} from 'react-native-gifted-chat'
 import uuid from 'react-native-uuid'
 import type {Message as CustomMessage} from '../../model/chat'
-import avatar from '../../assets/images/ChatLogo.png'
+import avatar from '../../assets/images/Logo.png'
 
 
 export enum InputTypes {

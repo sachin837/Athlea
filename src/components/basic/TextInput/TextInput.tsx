@@ -46,7 +46,7 @@ export const TextInput:FC<TextInputProps> = (props) => {
         />
         <IconContainer>{props.icon}</IconContainer>
         {props.password && (
-          <TouchableOpacity onPress={togglePasswordVisibility}>
+          <TouchableOpacity onPress={togglePasswordVisibility} style={{marginRight:12}}>
             <Icons name={passwordVisible ? 'visibility' : 'visibility-off'} color={Colors.black1} size={20} />
           </TouchableOpacity>
         )}

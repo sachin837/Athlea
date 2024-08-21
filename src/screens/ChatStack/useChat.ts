@@ -1,7 +1,7 @@
 import {useCallback, useEffect, useRef, useState} from 'react'
 import type BottomSheet from '@gorhom/bottom-sheet'
 import {useChatLayout} from '../../layouts'
-import avatar from '../../assets/images/ChatLogo.png'
+import avatar from '../../assets/images/Logo.png'
 import { useNavigation } from '@react-navigation/native'
 
 

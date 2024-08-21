@@ -124,6 +124,7 @@ export const Login = () => {
               autoCapitalize="none"
               keyboardType={'email-address'}
               inputStyle={styles.emailInput}
+              inputContainer={{ height: 50,}}
             />
             <TextInput
               label={'Password'}

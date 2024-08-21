@@ -5,6 +5,7 @@ import {
   heightPercentageToDP,
   widthPercentageToDP,
 } from 'utils'
+import {SafeAreaView} from 'react-native-safe-area-context'
 
 export const Container = styled.View`
   ${({theme: {space}}) => css`
@@ -26,7 +27,10 @@ export const HeaderContainer = styled.View`
   width: 100%;
   background-color: transparent;
 `
-
+export const OnborderingHeaderContainer = styled.View`
+  width: 100%;
+  background-color: transparent;
+`
 export const MicIconButton = styled.TouchableOpacity`
   ${({theme, backgroundColor}) => css`
     background-color: ${backgroundColor ? backgroundColor : theme.primary};
@@ -125,4 +129,24 @@ export const Subtext = styled.Text`
   color: #7f7f7f;
   font-weight: light;
   padding-bottom: 10px;
+`
+export const ContainerHeader = styled.View`
+  ${({theme}) => css`
+    background: ${theme.background};
+    border-bottom: 1px solid ${theme.divider};
+  `}
+`
+export const Content = styled(SafeAreaView)`
+  flex-direction: row;
+  padding: 13px 16px;
+  align-items: center;
+`
+export const BackButton = styled.TouchableOpacity`
+  flex-direction: row;
+  gap: 4px;
+  flex: 1;
+`
+export const RightComponentContainer = styled.View`
+  flex: 1;
+  align-items: flex-end;
 `

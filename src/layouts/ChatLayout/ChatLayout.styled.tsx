@@ -14,19 +14,19 @@ export const styles = StyleSheet.create({
     borderTopWidth: undefined,
     borderColor: Colors.purple,
     borderWidth: 1,
-    marginHorizontal: 16,
+    marginHorizontal: 11,
     borderRadius: 12,
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom:20
+    marginBottom:8
   },
   send: {
     backgroundColor: Colors.purple,
     margin: 8,
     alignItems: 'center',
     justifyContent: 'center',
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 8,
   },
   microphoneBtn: {
@@ -38,8 +38,8 @@ export const styles = StyleSheet.create({
     borderRadius: 8,
   },
   messagesContainer: {
-    paddingHorizontal: 16,
-    paddingTop: 8,
+    paddingHorizontal: 1,
+    paddingTop: 2,
     gap: 8,
   },
 })

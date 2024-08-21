@@ -457,7 +457,7 @@ export const Onboarding = () => {
           <IconButton
             type="right-open-mini"
             size={18}
-            backgroundColor="#ffffffff"
+            backgroundColor="red"
             borderColor={theme.primaryscale[4]}
             onPress={() => navigation.navigate('Home')}
           />

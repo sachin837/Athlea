@@ -15,4 +15,5 @@ export const TitleContainer = styled.View`
 
 export const ButtonContainer = styled.View`
   gap: 16px;  
+  marginBottom:10px;
 `

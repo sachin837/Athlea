@@ -14,8 +14,8 @@ export const InputContainer = styled.View<{focused?: boolean, error?: boolean}>`
     border-width: 1px;
     border-color: ${(props.error && theme.error500) || (props.focused && theme.brand) || 'transparent'};
     background: ${theme.black6};
-    padding: 14px 16px;
-    margin: 8px 0;
+    marginTop:5px;
+    paddingLeft:5px
   `}
 `
 
