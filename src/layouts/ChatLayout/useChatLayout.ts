@@ -1,9 +1,10 @@
 import {useCallback, useEffect, useState} from 'react'
 import {GiftedChat} from 'react-native-gifted-chat'
 import uuid from 'react-native-uuid'
-import type {Message as CustomMessage} from '../../model/chat'
+import type {Message as CustomMessage, FileMessage} from '../../model/chat'
 import avatar from '../../assets/images/Logo.png'
-
+import DocumentPicker from 'react-native-document-picker';
+import { Keyboard, Platform } from 'react-native';
 
 export enum InputTypes {
   text,
@@ -41,6 +42,45 @@ export const useChatLayout = () => {
     )
   }, [])
 
+  const handleAttachment = async () => {
+    try {
+      const res = await DocumentPicker.pick({
+        type: [DocumentPicker.types.images],
+      })
+
+      let fileUri = res[0].uri
+      if (Platform.OS === 'ios') {
+        // Convert file path for iOS
+        fileUri = decodeURIComponent(fileUri).replace('file://', '');
+      }
+
+      const message: FileMessage = {
+        _id: Math.random().toString(36).substring(7),
+        text: '', // or you can set a default text, like the file name
+        createdAt: new Date(),
+        user: {
+          _id: 1,
+          name: 'User',
+        },
+        file: {
+          uri: fileUri,
+          name: res.name,
+          type: res.type,
+        },
+        image:fileUri,
+      };
+
+      onSend([message])
+      Keyboard.dismiss()
+    } catch (err) {
+      if (DocumentPicker.isCancel(err)) {
+        console.log('User cancelled the picker');
+      } else {
+        throw err;
+      }
+    }
+  }
+
   return {
     messages,
     setMessages,
@@ -48,6 +88,7 @@ export const useChatLayout = () => {
     addAthleaMessage,
     inputType,
     setInputType,
+    handleAttachment,
   }
 }
 

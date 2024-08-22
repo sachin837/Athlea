@@ -7,6 +7,12 @@ export const MainContainer = styled.View`
   flex: 1;
   background: white;
 `
+export const SendContainer = styled.View`
+  background: white;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+`
 
 export const styles = StyleSheet.create({
   inputToolbar: {
@@ -41,5 +47,15 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 1,
     paddingTop: 2,
     gap: 8,
+  },
+  attachmentIcon: {
+    width: 30,
+    height: 30,
+    tintColor: Colors.purple,
+  },
+  fileImage: {
+    width: 150,
+    height: 100,
+    borderRadius: 10,
   },
 })

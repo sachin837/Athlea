@@ -5,4 +5,5 @@ export const Images = {
   google: require('./Google.png'),
   facebook: require('./Facebook.png'),
   randomPeople: require('./people/RandomImage1.png'),
+  attachmentIcon: require('./attachment.png'),
 }

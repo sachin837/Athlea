@@ -15,3 +15,11 @@ export interface MessageOption {
   value: string
   icon?: IconName
 }
+
+export interface FileMessage extends IMessage {
+  file?: {
+    uri: string;
+    name: string;
+    type: string;
+  };
+}
