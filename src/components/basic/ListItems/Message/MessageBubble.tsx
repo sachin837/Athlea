@@ -34,6 +34,7 @@ export const MessageBubble:FC<Props> = (props) => {
           margin: -6,
           padding:2,
           marginLeft:2,
+          marginTop:0.1,
         },
         right: {
           borderRadius: 8,
@@ -41,7 +42,9 @@ export const MessageBubble:FC<Props> = (props) => {
           backgroundColor: theme.messageRightBubble,
           borderWidth: 1,
           borderColor: theme.messageRightBubble,
-          padding:4,
+          margin: -6,
+          padding:2,
+          marginRight:2,
         },
       }}
       renderTime={() => null}
