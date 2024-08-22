@@ -5,15 +5,17 @@ import {
   InputToolbarProps,
   MessageProps,
   Send, SendProps,
+  MessageImageProps,
 } from 'react-native-gifted-chat'
 import {SafeAreaView} from 'react-native-safe-area-context'
 import {Button, Message} from '../../components'
 import {Icons} from '../../assets/icons'
-import type {Message as CustomMessage} from 'model/chat'
-import {MainContainer, styles} from './ChatLayout.styled'
+import type {Message as CustomMessage, FileMessage} from 'model/chat'
+import {MainContainer, SendContainer, styles} from './ChatLayout.styled'
 import {InputTypes, UseChatLayoutType} from './useChatLayout'
-import { TouchableOpacity } from 'react-native'
+import { Image, TouchableOpacity } from 'react-native'
 import { Colors } from 'theme'
+import { Images } from '../../assets/images'
 
 interface Props extends UseChatLayoutType {
   microphoneOpen:()=>void;
@@ -35,7 +37,7 @@ export const ChatLayout:FC<Props> = (props) => {
           ? {
             renderActions: () => (
               <TouchableOpacity style={styles.microphoneBtn} onPress={props.microphoneOpen}>
-                <Icons name={'microphone'} color={'black'} />
+                <Icons name={'microphone'} color={'black'} size={28} />
               </TouchableOpacity>
             ),
           }
@@ -60,13 +62,35 @@ export const ChatLayout:FC<Props> = (props) => {
       return renderInputToolbar(toolbarProps)
     }
   }, [props.inputType])
-
+  
   const renderSend = useCallback((sendProps:SendProps<CustomMessage>) => (
-    <Send {...sendProps} alwaysShowSend containerStyle={styles.send}>
-      <Icons name={'arrowUp'} color={'white'} />
-    </Send>
+    <SendContainer>
+      <TouchableOpacity style={{marginRight:5}} onPress={props.handleAttachment}>
+        <Image source={Images.attachmentIcon} style={styles.attachmentIcon} />
+      </TouchableOpacity>
+      <Send {...sendProps} alwaysShowSend containerStyle={styles.send}>
+        <Icons name={'arrowUp'} color={'white'} size={25} />
+      </Send>
+    </SendContainer>
   ), [])
+  const renderMessageFile = useCallback((fileProps: MessageImageProps<FileMessage>) => {
+    const { currentMessage } = fileProps
 
+    if (currentMessage?.file) {
+      return (
+        <TouchableOpacity
+          onPress={() => { }}
+        >
+          <Image
+            source={{ uri: currentMessage.file.uri }}
+            style={styles.fileImage}
+          />
+        </TouchableOpacity>
+      )
+    }
+
+    return null
+  },[])
   return (
     <MainContainer>
       <SafeAreaView style={{flex: 1}} edges={['bottom']}>
@@ -76,6 +100,7 @@ export const ChatLayout:FC<Props> = (props) => {
           renderSend={renderSend}
           messages={props.messages}
           renderMessage={renderMessage}
+          renderMessageImage={renderMessageFile}
           renderInputToolbar={renderToolbar}
           listViewProps={{
             contentContainerStyle: styles.messagesContainer,
