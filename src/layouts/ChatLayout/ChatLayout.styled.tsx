@@ -8,7 +8,6 @@ export const MainContainer = styled.View`
   background: white;
 `
 export const SendContainer = styled.View`
-  background: white;
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
@@ -20,11 +19,11 @@ export const styles = StyleSheet.create({
     borderTopWidth: undefined,
     borderColor: Colors.purple,
     borderWidth: 1,
-    marginHorizontal: 11,
+    marginHorizontal: 13,
     borderRadius: 12,
     alignItems: 'center',
     flexDirection: 'row',
-    marginBottom:8
+    marginBottom:8,
   },
   send: {
     backgroundColor: Colors.purple,
