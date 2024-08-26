@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
   attachmentIcon: {
     width: 30,
     height: 30,
-    tintColor: Colors.purple,
+    tintColor: Colors.black2,
   },
   fileImage: {
     width: 150,
