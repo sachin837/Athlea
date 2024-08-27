@@ -9,13 +9,13 @@ export const Subtitle = styled.Text`
   `}
 `
 
-export const ListContainer = styled.View`
-  ${({theme}) => css`
-    padding: 24px 0;
-    border-top-width: 1px;
-    border-top-color: ${theme.borderColor};
-  `}
-`
+// export const ListContainer = styled.View`
+//   ${({theme}) => css`
+//     padding: 24px 0;
+//     border-top-width: 1px;
+//     border-top-color: ${theme.borderColor};
+//   `}
+// `
 
 export const Username = styled.Text`
   ${({theme}) => css`
@@ -27,3 +27,95 @@ export const BackButton = styled.TouchableOpacity`
   gap: 4px;
   marging-right:5px;
 `
+export const Container = styled.ScrollView`
+  flex: 1;
+  padding: 20px;
+  background-color: #f5f7fb;
+`;
+// Profile Header Component
+export const ProfileHeader = styled.View`
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 15px;
+  margin-bottom: 15px;
+  elevation: 1;
+  shadow-color: #000;
+  shadow-opacity: 0.1;
+  shadow-radius: 3px;
+  shadow-offset: 0px 2px;
+`;
+
+export const ProfileHeaderView = styled.View`
+  margin-bottom: 15px;
+  align-items: center;
+`;
+
+export const ProfileImage = styled.Image`
+  width: 80px;
+  height: 80px;
+  border-radius: 40px;
+  margin-bottom: 10px;
+`;
+
+export const ProfileName = styled.Text`
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+`;
+export const ListItem = styled.TouchableOpacity`
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 15px;
+`;
+
+// List Item Component
+export const ListContainer = styled.TouchableOpacity`
+  background-color: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  elevation: 1;
+  shadow-color: #000;
+  shadow-opacity: 0.1;
+  shadow-radius: 3px;
+  shadow-offset: 0px 2px;
+`;
+
+export const ItemText = styled.Text`
+  font-size: 16px;
+  color: #333;
+  margin-left: 5px;
+`;
+
+export const IconWrapper = styled.View`
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ListItemIcon = styled.Image`
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+`;
+
+export const LogoutButton = styled.TouchableOpacity`
+  background-color: #fff;
+  border: 1px solid #ff3b30;
+  padding: 15px;
+  border-radius: 10px;
+  margin-top: 20px;
+  align-items: center;
+`;
+
+export const LogoutText = styled.Text`
+  color: #ff3b30;
+  font-size: 16px;
+`;
+
+export const FooterText = styled.Text`
+  color: #8e8e93;
+  font-size: 14px;
+  text-align: center;
+  margin-top: 20px;
+`;

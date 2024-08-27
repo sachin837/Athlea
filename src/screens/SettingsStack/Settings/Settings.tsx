@@ -1,20 +1,42 @@
-import React, { FC, useMemo, useContext, useState, useEffect } from 'react';
-import { DevSettings, ScrollView, Text, TouchableOpacity, View } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Switch } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons'
-import { RouteNames } from '_constants';
-import { ProfileImage, ListItem, BackHeader } from 'components';
-import { ListContainer, Subtitle, Username, BackButton } from './Settings.style';
-import { useNavigation } from '@react-navigation/native';
-import {useTheme} from 'styled-components/native'
-import { useThemes } from "../../../contexts/ThemeContext";
-import { onSignOut, useAppDispatch } from 'store';
+import React, {FC, useMemo, useContext, useState, useEffect} from 'react';
+import {
+  DevSettings,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {Switch} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/Ionicons';
+import {RouteNames} from '_constants';
+// import { ProfileImage, ListItem, BackHeader } from 'components';
+import {
+  Container,
+  FooterText,
+  IconWrapper,
+  ItemText,
+  ListContainer,
+  ListItem,
+  ListItemIcon,
+  LogoutButton,
+  LogoutText,
+  ProfileHeader,
+  ProfileHeaderView,
+  ProfileImage,
+  ProfileListItem,
+  ProfileName,
+} from './Settings.style';
+import {useNavigation} from '@react-navigation/native';
+import {useTheme} from 'styled-components/native';
+import {useThemes} from '../../../contexts/ThemeContext';
+import {onSignOut, useAppDispatch} from 'store';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {BackHeader} from 'components';
 
 export const Settings = () => {
-  const theme = useTheme()
-  const { isTheme, setIsTheme } = useThemes();
+  const theme = useTheme();
+  const {isTheme, setIsTheme} = useThemes();
   const [isSwitchOn, setIsSwitchOn] = useState(isTheme === 'dark');
 
   useEffect(() => {
@@ -28,69 +50,129 @@ export const Settings = () => {
   };
 
   const name = 'michwilf';
-  const navigation = useNavigation()
-  const dispatch = useAppDispatch()
+  const navigation = useNavigation();
+  const dispatch = useAppDispatch();
 
-  const accountSettingsConfig = useMemo(() => ([
-    { title: 'Edit profile', onPress: () => navigation.navigate(RouteNames.editProfile) },
-    { title: 'Change password', onPress: () => navigation.navigate(RouteNames.changePassword) },
-    { title: 'Language', onPress: () => { } },
-    { title: 'Push notifications', onPress: () => { }, rightComponent: <Switch /> },
-    { title: 'Dark mode', onPress: onToggleSwitch, rightComponent: <Switch value={isSwitchOn} onValueChange={onToggleSwitch} /> },
-  ]), [isSwitchOn, isTheme]);
+  const accountSettingsConfig = useMemo(
+    () => [
+      {
+        title: 'Groups',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'My bubble',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'My communities',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'My teams',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'Notifications',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'Device integration',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'Payment',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      {
+        title: 'Calendar syncing',
+        icon: 'person-outline',
+        onPress: () => navigation.navigate(RouteNames.editProfile),
+      },
+      // {
+      //   title: 'Change password',
+      //   onPress: () => navigation.navigate(RouteNames.changePassword),
+      // },
+      // {title: 'Language', onPress: () => {}},
+      // {
+      //   title: 'Push notifications',
+      //   onPress: () => {},
+      //   rightComponent: <Switch />,
+      // },
+      // {
+      //   title: 'Dark mode',
+      //   onPress: onToggleSwitch,
+      //   rightComponent: (
+      //     <Switch value={isSwitchOn} onValueChange={onToggleSwitch} />
+      //   ),
+      // },
+    ],
+    [isSwitchOn, isTheme],
+  );
 
-  const moreConfig = useMemo(() => ([
-    { title: 'About us', onPress: () => { } },
-    { title: 'Privacy policy', onPress: () => { } },
-    { title: 'Terms and conditions', onPress: () => { } },
-    { title: 'Give Feedback', onPress: () => { } },
-  ]), []);
+  const moreConfig = useMemo(
+    () => [
+      {title: 'About us', onPress: () => {}},
+      {title: 'Privacy policy', onPress: () => {}},
+      {title: 'Terms and conditions', onPress: () => {}},
+      {title: 'Give Feedback', onPress: () => {}},
+    ],
+    [],
+  );
   const signOut = async () => {
-    const resultAction = await dispatch(onSignOut())
+    const resultAction = await dispatch(onSignOut());
     if (onSignOut.fulfilled.match(resultAction)) {
       await AsyncStorage.clear();
       // navigation.navigate(RouteNames.authStack)
-      DevSettings.reload()
-      
+      DevSettings.reload();
     }
-  }
+  };
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: theme.pageBackground }}>
-      <ScrollView>
-        <View style={{ padding: 20 }}>
-          <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <BackButton onPress={navigation.goBack}>
-              <Icon name={'chevron-back-outline'} size={30} color={theme.subtitle} />
-            </BackButton>
+    <SafeAreaView style={{flex: 1, backgroundColor: theme.pageBackground}}>
+      <BackHeader />
+      <Container>
+        <ProfileHeader>
+          <ProfileHeaderView>
             <ProfileImage
-              source={undefined}
-              letter={name[0].toUpperCase()}
+              source={require('../../../assets/images/people/RandomImage1.png')}
             />
-            <View style={{ marginLeft: 8 }}>
-              <Username>{name}</Username>
-              <TouchableOpacity onPress={signOut}>
-                <Text style={{ fontSize: 14, color: 'red' }}>Sign out</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+            <ProfileName>Charlie Cooper</ProfileName>
+          </ProfileHeaderView>
+          <ListItem>
+            <IconWrapper>
+              <Icon name="person-outline" size={16} color="#8e8e93" />
+              <ItemText>Personal details</ItemText>
+            </IconWrapper>
+            <Icon name="chevron-forward" size={20} color="#8e8e93" />
+          </ListItem>
+        </ProfileHeader>
         <ListContainer>
-          <Subtitle>Account Settings</Subtitle>
-          <View style={{ gap: 32 }}>
             {accountSettingsConfig.map((item, index) => (
-              <ListItem {...item} key={index} />
+              <ListItem key={index}>
+                <IconWrapper>
+                  <Icon name={item.icon} size={16} color="#8e8e93" />
+                  <ItemText>{item.title}</ItemText>
+                </IconWrapper>
+                <Icon name="chevron-forward" size={20} color="#8e8e93" />
+              </ListItem>
             ))}
-          </View>
         </ListContainer>
-        <ListContainer>
-          <Subtitle>More</Subtitle>
-          <View style={{ gap: 32 }}>
-            {moreConfig.map((item, index) => (
-              <ListItem {...item} key={index} />
-            ))}
-          </View>
-        </ListContainer>
-      </ScrollView>
+        {/* Repeat ListItem for other options as in the screenshot */}
+
+        <LogoutButton>
+          <LogoutText>Log out</LogoutText>
+        </LogoutButton>
+
+        <FooterText>About us</FooterText>
+        <FooterText>Privacy policy</FooterText>
+        <FooterText>Terms & conditions</FooterText>
+      </Container>
     </SafeAreaView>
   );
 };
