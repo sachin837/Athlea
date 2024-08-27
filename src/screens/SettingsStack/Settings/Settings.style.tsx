@@ -28,14 +28,12 @@ export const BackButton = styled.TouchableOpacity`
   marging-right:5px;
 `
 export const Container = styled.ScrollView`
-  flex: 1;
-  padding: 20px;
-  background-color: #f5f7fb;
+  margin: 20px;
 `;
 // Profile Header Component
 export const ProfileHeader = styled.View`
   background-color: #fff;
-  padding: 20px;
+  padding: 15px;
   border-radius: 15px;
   margin-bottom: 15px;
   elevation: 1;
@@ -62,17 +60,28 @@ export const ProfileName = styled.Text`
   font-weight: 600;
   color: #333;
 `;
-export const ListItem = styled.TouchableOpacity`
+export const ProfileListItem = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 15px;
+  padding-bottom: 5px;
+`;
+export const ListItem = styled.TouchableOpacity`
+${({theme}) => css`
+    border-bottom-color: ${props => props.isLastIndex ? '#fff' : theme.black5};
+    border-bottom-width: ${props => props.isLastIndex ? '0px' : '1px'};
+    font-size: 18px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 15px;
+    padding: 15px;
+  `}
 `;
 
 // List Item Component
 export const ListContainer = styled.TouchableOpacity`
   background-color: #fff;
-  padding: 15px;
   border-radius: 10px;
   margin-bottom: 10px;
   elevation: 1;

@@ -77,12 +77,12 @@ export const Settings = () => {
       },
       {
         title: 'Notifications',
-        icon: 'person-outline',
+        icon: 'notifications-outline',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'Device integration',
-        icon: 'person-outline',
+        icon: 'bluetooth',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
@@ -92,7 +92,7 @@ export const Settings = () => {
       },
       {
         title: 'Calendar syncing',
-        icon: 'person-outline',
+        icon: 'calendar-clear-outline',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       // {
@@ -144,24 +144,24 @@ export const Settings = () => {
             />
             <ProfileName>Charlie Cooper</ProfileName>
           </ProfileHeaderView>
-          <ListItem>
+          <ProfileListItem>
             <IconWrapper>
-              <Icon name="person-outline" size={16} color="#8e8e93" />
+              <Icon name="person-outline" size={20} color="#8e8e93" />
               <ItemText>Personal details</ItemText>
             </IconWrapper>
             <Icon name="chevron-forward" size={20} color="#8e8e93" />
-          </ListItem>
+          </ProfileListItem>
         </ProfileHeader>
         <ListContainer>
-            {accountSettingsConfig.map((item, index) => (
-              <ListItem key={index}>
-                <IconWrapper>
-                  <Icon name={item.icon} size={16} color="#8e8e93" />
-                  <ItemText>{item.title}</ItemText>
-                </IconWrapper>
-                <Icon name="chevron-forward" size={20} color="#8e8e93" />
-              </ListItem>
-            ))}
+          {accountSettingsConfig.map((item, index) => (
+            <ListItem key={index} isLastIndex={(accountSettingsConfig.length - 1) === index}>
+              <IconWrapper>
+                <Icon name={item.icon} size={20} color="#8e8e93" />
+                <ItemText>{item.title}</ItemText>
+              </IconWrapper>
+              <Icon name="chevron-forward" size={20} color="#8e8e93" />
+            </ListItem>
+          ))}
         </ListContainer>
         {/* Repeat ListItem for other options as in the screenshot */}
 
