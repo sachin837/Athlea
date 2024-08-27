@@ -17,6 +17,12 @@ export const useChatLayout = () => {
 
   const [inputType, setInputType] = useState<InputTypes>(InputTypes.text)
   const [messages, setMessages] = useState<CustomMessage[]>([])
+  const [isVisible, setIsVisible] = useState<boolean>(false)
+  
+
+  const openPermissioSheet = () => setIsVisible(true)
+
+  const closePermissioSheet = () => setIsVisible(false)
 
   const onSend = useCallback((newMessages:CustomMessage[] = []) => {
     setMessages(previousMessages =>
@@ -89,6 +95,9 @@ export const useChatLayout = () => {
     inputType,
     setInputType,
     handleAttachment,
+    isVisible,
+    openPermissioSheet,
+    closePermissioSheet,
   }
 }
 

@@ -7,7 +7,7 @@ import {
   Send, SendProps,
   MessageImageProps,
 } from 'react-native-gifted-chat'
-import {SafeAreaView} from 'react-native-safe-area-context'
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Button, Message} from '../../components'
 import {Icons} from '../../assets/icons'
 import type {Message as CustomMessage, FileMessage} from 'model/chat'
@@ -16,6 +16,8 @@ import {InputTypes, UseChatLayoutType} from './useChatLayout'
 import { Image, TouchableOpacity } from 'react-native'
 import { Colors } from 'theme'
 import { Images } from '../../assets/images'
+import BasePermissions from 'components/basic/BasePermissions/BasePermissions'
+import { Modal } from 'react-native'
 
 interface Props extends UseChatLayoutType {
   microphoneOpen:()=>void;
@@ -23,7 +25,7 @@ interface Props extends UseChatLayoutType {
 }
 
 export const ChatLayout:FC<Props> = (props) => {
-
+  const insets = useSafeAreaInsets();
   const renderMessage = useCallback((itemProps:  MessageProps<CustomMessage>) => (
     <Message {...itemProps} />
   ), [])
@@ -107,6 +109,13 @@ export const ChatLayout:FC<Props> = (props) => {
           }}
           textInputProps={{placeholder: 'Tell Athlea your goal...',color:Colors.black1}}
         />
+        <Modal
+          visible={props.isVisible}
+          transparent={true}
+          animationType="none"
+          onRequestClose={props.closePermissioSheet}>
+          <BasePermissions onClose={props.closePermissioSheet} />
+        </Modal>
       </SafeAreaView>
     </MainContainer>
   )

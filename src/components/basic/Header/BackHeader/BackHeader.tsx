@@ -14,7 +14,7 @@ export const BackHeader:FC<HeaderProps> = (props) => {
   return (
     <Container>
       <Content edges={['top']}>
-        <BackButton onPress={navigation.goBack}>
+        <BackButton onPress={props.onBack || navigation.goBack}>
           <Icon name={'chevron-back-outline'} size={24} color={theme.subtitle} />
           <Text themeColor={'subtitle'}>Back</Text>
         </BackButton>
