@@ -9,6 +9,7 @@ import {
   PermissionItem,
   PermissionTextContainer,
   PermissionTitle,
+  PermissionTitleContainer,
   Title,
 } from './BasePermissions.style';
 import {Switch} from 'react-native';
@@ -30,9 +31,11 @@ const BasePermissions = (props: any) => {
           location and activity data.
         </Description>
         <PermissionItem>
-          <Icon name="location-outline" size={24} color="#ffa500" />
           <PermissionTextContainer>
-            <PermissionTitle>Location</PermissionTitle>
+            <PermissionTitleContainer>
+              <Icon name="location-outline" size={20} color="#ffa500" />
+              <PermissionTitle>Location</PermissionTitle>
+            </PermissionTitleContainer>
             <PermissionDescription>
               Description orem ipsum dolor sit amet consectetur.
             </PermissionDescription>
@@ -46,9 +49,11 @@ const BasePermissions = (props: any) => {
           />
         </PermissionItem>
         <PermissionItem>
-          <Icon name="person-outline" size={24} color="#1e90ff" />
           <PermissionTextContainer>
-            <PermissionTitle>Motion & Fitness</PermissionTitle>
+            <PermissionTitleContainer>
+              <Icon name="person-outline" size={20} color="#1e90ff" />
+              <PermissionTitle>Motion & Fitness</PermissionTitle>
+            </PermissionTitleContainer>
             <PermissionDescription>
               Description orem ipsum dolor sit amet consectetur.
             </PermissionDescription>
@@ -62,9 +67,11 @@ const BasePermissions = (props: any) => {
           />
         </PermissionItem>
         <PermissionItem>
-          <Icon name="heart-outline" size={24} color="#ff4d4f" />
           <PermissionTextContainer>
-            <PermissionTitle>Apple Health</PermissionTitle>
+            <PermissionTitleContainer>
+              <Icon name="heart-outline" size={20} color="#ff4d4f" />
+              <PermissionTitle>Apple Health</PermissionTitle>
+            </PermissionTitleContainer>
             <PermissionDescription>
               Description orem ipsum dolor sit amet consectetur.
             </PermissionDescription>

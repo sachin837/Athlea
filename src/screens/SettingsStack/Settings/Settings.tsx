@@ -1,83 +1,82 @@
-import React, {FC, useMemo, useContext, useState, useEffect} from 'react';
+import React, {useMemo, useState, useEffect} from 'react'
+import { DevSettings } from 'react-native'
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
+import Icon from 'react-native-vector-icons/Ionicons'
+import {RouteNames} from '_constants'
 import {
-  DevSettings,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import {SafeAreaView} from 'react-native-safe-area-context';
-import {Switch} from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Ionicons';
-import {RouteNames} from '_constants';
-// import { ProfileImage, ListItem, BackHeader } from 'components';
-import {
+  AvatarContainer,
   Container,
-  FooterText,
+  DeleteAccountItem,
+  DetailsSection,
+  Footer,
+  HeaderButton,
   IconWrapper,
-  ItemText,
   ListContainer,
   ListItem,
-  ListItemIcon,
   LogoutButton,
-  LogoutText,
   ProfileHeader,
-  ProfileHeaderView,
-  ProfileImage,
   ProfileListItem,
-  ProfileName,
-} from './Settings.style';
-import {useNavigation} from '@react-navigation/native';
-import {useTheme} from 'styled-components/native';
-import {useThemes} from '../../../contexts/ThemeContext';
-import {onSignOut, useAppDispatch} from 'store';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {BackHeader} from 'components';
+  SheetContainer,
+  SheetHeader,
+  styles,
+} from './Settings.style'
+import {useNavigation} from '@react-navigation/native'
+import {useTheme} from 'styled-components/native'
+import {useThemes} from '../../../contexts/ThemeContext'
+import {onSignOut, useAppDispatch} from 'store'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import {BackHeader, ProfileImage, Text, TextInput} from 'components'
+import {useSettings} from './useSettings'
+import BottomSheet from '@gorhom/bottom-sheet'
+import {Colors} from 'theme'
+import { Icons } from '../../../assets/icons'
 
 export const Settings = () => {
-  const theme = useTheme();
-  const {isTheme, setIsTheme} = useThemes();
-  const [isSwitchOn, setIsSwitchOn] = useState(isTheme === 'dark');
-
+  const theme = useTheme()
+  const {isTheme, setIsTheme} = useThemes()
+  const [isSwitchOn, setIsSwitchOn] = useState(isTheme === 'dark')
+  const insets = useSafeAreaInsets()
+  const {profileSheetRef, snapPoints, openProfileSheet, closeProfileSheet} =
+    useSettings()
   useEffect(() => {
-    setIsSwitchOn(isTheme === 'dark');
-  }, [isTheme]);
+    setIsSwitchOn(isTheme === 'dark')
+  }, [isTheme])
 
   const onToggleSwitch = () => {
-    const newTheme = isTheme === 'light' ? 'dark' : 'light';
-    setIsTheme(newTheme);
-    setIsSwitchOn(newTheme === 'dark');
-  };
+    const newTheme = isTheme === 'light' ? 'dark' : 'light'
+    setIsTheme(newTheme)
+    setIsSwitchOn(newTheme === 'dark')
+  }
 
-  const name = 'michwilf';
-  const navigation = useNavigation();
-  const dispatch = useAppDispatch();
+  const name = 'michwilf'
+  const navigation = useNavigation()
+  const dispatch = useAppDispatch()
 
   const accountSettingsConfig = useMemo(
     () => [
       {
         title: 'Groups',
-        icon: 'person-outline',
+        icon: 'users',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'My bubble',
-        icon: 'person-outline',
+        icon: 'users',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'My communities',
-        icon: 'person-outline',
+        icon: 'users',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'My teams',
-        icon: 'person-outline',
+        icon: 'users',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'Notifications',
-        icon: 'notifications-outline',
+        icon: 'notificationBox',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
@@ -87,12 +86,12 @@ export const Settings = () => {
       },
       {
         title: 'Payment',
-        icon: 'person-outline',
+        icon: 'cardPayment',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       {
         title: 'Calendar syncing',
-        icon: 'calendar-clear-outline',
+        icon: 'calendarCheck',
         onPress: () => navigation.navigate(RouteNames.editProfile),
       },
       // {
@@ -114,7 +113,7 @@ export const Settings = () => {
       // },
     ],
     [isSwitchOn, isTheme],
-  );
+  )
 
   const moreConfig = useMemo(
     () => [
@@ -124,55 +123,173 @@ export const Settings = () => {
       {title: 'Give Feedback', onPress: () => {}},
     ],
     [],
-  );
+  )
   const signOut = async () => {
-    const resultAction = await dispatch(onSignOut());
+    const resultAction = await dispatch(onSignOut())
     if (onSignOut.fulfilled.match(resultAction)) {
-      await AsyncStorage.clear();
+      await AsyncStorage.clear()
       // navigation.navigate(RouteNames.authStack)
-      DevSettings.reload();
+      DevSettings.reload()
     }
-  };
+  }
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: theme.pageBackground}}>
       <BackHeader />
       <Container>
         <ProfileHeader>
-          <ProfileHeaderView>
+          <AvatarContainer>
             <ProfileImage
+              size={100}
+              letter={name[0].toUpperCase()}
+              // backgroundColor={'#e1e1e1'}
               source={require('../../../assets/images/people/RandomImage1.png')}
             />
-            <ProfileName>Charlie Cooper</ProfileName>
-          </ProfileHeaderView>
-          <ProfileListItem>
+            <Text
+              color={Colors.black1}
+              style={{marginTop: 20}}
+              weight="700"
+              size={18}
+              centered>
+              Charlie Cooper
+            </Text>
+          </AvatarContainer>
+          <ProfileListItem onPress={openProfileSheet}>
             <IconWrapper>
-              <Icon name="person-outline" size={20} color="#8e8e93" />
-              <ItemText>Personal details</ItemText>
+              <Icons name="user" size={20}  />
+              <Text color={Colors.black1} size={16} weight="400" style={{marginLeft: 5}}>
+                Personal details
+              </Text>
             </IconWrapper>
-            <Icon name="chevron-forward" size={20} color="#8e8e93" />
+            <Icon name="chevron-forward" size={20} color={Colors.black4} />
           </ProfileListItem>
         </ProfileHeader>
         <ListContainer>
           {accountSettingsConfig.map((item, index) => (
-            <ListItem key={index} isLastIndex={(accountSettingsConfig.length - 1) === index}>
+            <ListItem
+              key={index}
+              isLastIndex={accountSettingsConfig.length - 1 === index}>
               <IconWrapper>
-                <Icon name={item.icon} size={20} color="#8e8e93" />
-                <ItemText>{item.title}</ItemText>
+                <Icons name={item.icon} size={20} color={Colors.black2} />
+                <Text color={Colors.black1} size={16} weight="400" style={{marginLeft: 5}}>
+                  {item.title}
+                </Text>
               </IconWrapper>
-              <Icon name="chevron-forward" size={20} color="#8e8e93" />
+              <Icon name="chevron-forward" size={20} color={Colors.black4} />
             </ListItem>
           ))}
         </ListContainer>
-        {/* Repeat ListItem for other options as in the screenshot */}
-
-        <LogoutButton>
-          <LogoutText>Log out</LogoutText>
+        <DeleteAccountItem onPress={openProfileSheet}>
+          <IconWrapper>
+            <Text color={Colors.black1} size={16} weight="400">
+              Delete account
+            </Text>
+          </IconWrapper>
+          <Icon name="chevron-forward" size={20} color={Colors.black4} />
+        </DeleteAccountItem>
+        <LogoutButton onPress={signOut}>
+          <IconWrapper>
+            <Icon name="exit-outline" size={22} color={Colors.warning500} />
+            <Text color={Colors.warning500} weight="400" size={16} style={{marginLeft: 5}}>
+              Log out
+            </Text>
+          </IconWrapper>
         </LogoutButton>
-
-        <FooterText>About us</FooterText>
-        <FooterText>Privacy policy</FooterText>
-        <FooterText>Terms & conditions</FooterText>
+        <Footer style={{gap: 18}}>
+          <Text color={Colors.black3} size={14} centered>
+            About us
+          </Text>
+          <Text color={Colors.black3} size={14} centered>
+            Privacy policy
+          </Text>
+          <Text color={Colors.black3} size={14} centered>
+            Terms & conditions
+          </Text>
+        </Footer>
       </Container>
+      <BottomSheet
+        index={-1}
+        ref={profileSheetRef}
+        enablePanDownToClose
+        topInset={insets.top}
+        snapPoints={snapPoints}
+        handleComponent={() => null}>
+        <SheetContainer>
+          <SheetHeader>
+            <HeaderButton onPress={closeProfileSheet}>
+              <Text color={Colors.black3}>Cancel</Text>
+            </HeaderButton>
+            <Text color={Colors.black1} size={16} weight="500" centered>
+              Personal details
+            </Text>
+            <HeaderButton>
+              <Text color={Colors.black3}>Save</Text>
+            </HeaderButton>
+          </SheetHeader>
+
+          <AvatarContainer style={{ marginBottom: 10 }}>
+            <ProfileImage
+              edit
+              size={100}
+              letter={name[0].toUpperCase()}
+              backgroundColor={'#e1e1e1'}
+              source={require('../../../assets/images/people/RandomImage1.png')}
+            />
+            <Text color={Colors.black3} style={{marginTop: 20}} centered>
+              Change photo
+            </Text>
+          </AvatarContainer>
+          <DetailsSection style={{gap: 10}}>
+            <TextInput
+              label={'Name'}
+              placeholder={'Name'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="Charlie Cooper"
+            />
+            <TextInput
+              label={'Email'}
+              placeholder={'Email'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="charlie.cooper@gmail.com"
+            />
+            <TextInput
+              label={'Gender'}
+              placeholder={'Gender'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="Male"
+            />
+            <TextInput
+              label={'Age'}
+              placeholder={'Age'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="37 years"
+            />
+            <TextInput
+              label={'Weight'}
+              placeholder={'Weight'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="75 kg"
+            />
+            <TextInput
+              label={'Height'}
+              placeholder={'Height'}
+              placeholderTextColor={theme.placeholder}
+              inputStyle={styles.commonInputStyle}
+              autoCapitalize="none"
+              value="178 cm"
+            />
+          </DetailsSection>
+        </SheetContainer>
+      </BottomSheet>
     </SafeAreaView>
-  );
-};
+  )
+}

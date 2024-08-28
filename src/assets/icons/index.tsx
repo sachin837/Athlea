@@ -23,6 +23,12 @@ const IconNames = {
   wellBeing: {path: require('./well-being.svg').default, colorAppliesTo: 'fill'},
   cross: {path: require('./x-02.svg').default, colorAppliesTo: 'fill'},
   arrowUp: {path: require('./arrow-up.svg').default, colorAppliesTo: 'fill'},
+  bluetooth: {path: require('./bluetooth-01.svg').default},
+  calendarCheck: {path: require('./calendar-check.svg').default},
+  cardPayment: {path: require('./card-02.svg').default},
+  notificationBox: {path: require('./notification-box.svg').default},
+  user: {path: require('./user-profile-03.svg').default},
+  users: {path: require('./users-profiles-02.svg').default},
 }
 
 export type IconName = keyof typeof IconNames
