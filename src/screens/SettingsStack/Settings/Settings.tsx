@@ -1,5 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react'
-import { DevSettings } from 'react-native'
+import {DevSettings} from 'react-native'
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {RouteNames} from '_constants'
@@ -7,37 +7,41 @@ import {
   AvatarContainer,
   Container,
   DeleteAccountItem,
-  DetailsSection,
   Footer,
-  HeaderButton,
   IconWrapper,
   ListContainer,
   ListItem,
   LogoutButton,
   ProfileHeader,
   ProfileListItem,
-  SheetContainer,
-  SheetHeader,
-  styles,
 } from './Settings.style'
 import {useNavigation} from '@react-navigation/native'
 import {useTheme} from 'styled-components/native'
 import {useThemes} from '../../../contexts/ThemeContext'
 import {onSignOut, useAppDispatch} from 'store'
 import AsyncStorage from '@react-native-async-storage/async-storage'
-import {BackHeader, ProfileImage, Text, TextInput} from 'components'
+import {BackHeader, ProfileImage, Text} from 'components'
 import {useSettings} from './useSettings'
-import BottomSheet from '@gorhom/bottom-sheet'
 import {Colors} from 'theme'
-import { Icons } from '../../../assets/icons'
+import {Icons} from '../../../assets/icons'
+import {PersonalDetails} from './PersonalDetails'
+import BottomSheet from '@gorhom/bottom-sheet'
+import {Notifications} from './Notifications'
 
 export const Settings = () => {
   const theme = useTheme()
   const {isTheme, setIsTheme} = useThemes()
   const [isSwitchOn, setIsSwitchOn] = useState(isTheme === 'dark')
   const insets = useSafeAreaInsets()
-  const {profileSheetRef, snapPoints, openProfileSheet, closeProfileSheet} =
-    useSettings()
+  const {
+    profileSheetRef,
+    snapPoints,
+    openProfileSheet,
+    closeProfileSheet,
+    notificationSheetRef,
+    openNotificationSheet,
+    closeNotificationSheet,
+  } = useSettings()
   useEffect(() => {
     setIsSwitchOn(isTheme === 'dark')
   }, [isTheme])
@@ -46,7 +50,7 @@ export const Settings = () => {
     const newTheme = isTheme === 'light' ? 'dark' : 'light'
     setIsTheme(newTheme)
     setIsSwitchOn(newTheme === 'dark')
-  }
+  };
 
   const name = 'michwilf'
   const navigation = useNavigation()
@@ -77,7 +81,7 @@ export const Settings = () => {
       {
         title: 'Notifications',
         icon: 'notificationBox',
-        onPress: () => navigation.navigate(RouteNames.editProfile),
+        onPress: openNotificationSheet,
       },
       {
         title: 'Device integration',
@@ -155,8 +159,12 @@ export const Settings = () => {
           </AvatarContainer>
           <ProfileListItem onPress={openProfileSheet}>
             <IconWrapper>
-              <Icons name="user" size={20}  />
-              <Text color={Colors.black1} size={16} weight="400" style={{marginLeft: 5}}>
+              <Icons name="user" size={20} />
+              <Text
+                color={Colors.black1}
+                size={16}
+                weight="400"
+                style={{marginLeft: 5}}>
                 Personal details
               </Text>
             </IconWrapper>
@@ -167,10 +175,15 @@ export const Settings = () => {
           {accountSettingsConfig.map((item, index) => (
             <ListItem
               key={index}
+              onPress={item.onPress}
               isLastIndex={accountSettingsConfig.length - 1 === index}>
               <IconWrapper>
                 <Icons name={item.icon} size={20} color={Colors.black2} />
-                <Text color={Colors.black1} size={16} weight="400" style={{marginLeft: 5}}>
+                <Text
+                  color={Colors.black1}
+                  size={16}
+                  weight="400"
+                  style={{marginLeft: 5}}>
                   {item.title}
                 </Text>
               </IconWrapper>
@@ -189,7 +202,11 @@ export const Settings = () => {
         <LogoutButton onPress={signOut}>
           <IconWrapper>
             <Icon name="exit-outline" size={22} color={Colors.warning500} />
-            <Text color={Colors.warning500} weight="400" size={16} style={{marginLeft: 5}}>
+            <Text
+              color={Colors.warning500}
+              weight="400"
+              size={16}
+              style={{marginLeft: 5}}>
               Log out
             </Text>
           </IconWrapper>
@@ -213,83 +230,17 @@ export const Settings = () => {
         topInset={insets.top}
         snapPoints={snapPoints}
         handleComponent={() => null}>
-        <SheetContainer>
-          <SheetHeader>
-            <HeaderButton onPress={closeProfileSheet}>
-              <Text color={Colors.black3}>Cancel</Text>
-            </HeaderButton>
-            <Text color={Colors.black1} size={16} weight="500" centered>
-              Personal details
-            </Text>
-            <HeaderButton>
-              <Text color={Colors.black3}>Save</Text>
-            </HeaderButton>
-          </SheetHeader>
-
-          <AvatarContainer style={{ marginBottom: 10 }}>
-            <ProfileImage
-              edit
-              size={100}
-              letter={name[0].toUpperCase()}
-              backgroundColor={'#e1e1e1'}
-              source={require('../../../assets/images/people/RandomImage1.png')}
-            />
-            <Text color={Colors.black3} style={{marginTop: 20}} centered>
-              Change photo
-            </Text>
-          </AvatarContainer>
-          <DetailsSection style={{gap: 10}}>
-            <TextInput
-              label={'Name'}
-              placeholder={'Name'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="Charlie Cooper"
-            />
-            <TextInput
-              label={'Email'}
-              placeholder={'Email'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="charlie.cooper@gmail.com"
-            />
-            <TextInput
-              label={'Gender'}
-              placeholder={'Gender'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="Male"
-            />
-            <TextInput
-              label={'Age'}
-              placeholder={'Age'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="37 years"
-            />
-            <TextInput
-              label={'Weight'}
-              placeholder={'Weight'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="75 kg"
-            />
-            <TextInput
-              label={'Height'}
-              placeholder={'Height'}
-              placeholderTextColor={theme.placeholder}
-              inputStyle={styles.commonInputStyle}
-              autoCapitalize="none"
-              value="178 cm"
-            />
-          </DetailsSection>
-        </SheetContainer>
+        <PersonalDetails onClose={closeProfileSheet} />
+      </BottomSheet>
+      <BottomSheet
+        index={-1}
+        ref={notificationSheetRef}
+        enablePanDownToClose
+        topInset={insets.top}
+        snapPoints={snapPoints}
+        handleComponent={() => null}>
+        <Notifications onClose={closeNotificationSheet} />
       </BottomSheet>
     </SafeAreaView>
   )
-}
+};

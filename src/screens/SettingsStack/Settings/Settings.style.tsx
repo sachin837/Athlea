@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 import styled, {css} from 'styled-components/native'
 import {Colors} from 'theme'
 
@@ -105,7 +106,7 @@ export const LogoutButton = styled.TouchableOpacity`
   `}
 `
 
-export const SheetContainer = styled.ScrollView`
+export const SheetContainer = styled(ScrollView)`
   flex: 1;
   background-color: #fff;
 `
@@ -151,6 +152,30 @@ export const Footer = styled.View`
   align-items: center;
   padding: 20px;
 `
+export const MainToggle = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+`;
+
+export const Description = styled.Text`
+  font-size: 14px;
+  color: #8e8e93;
+  margin-bottom: 20px;
+`;
+
+export const Section = styled.View`
+  margin-bottom: 20px;
+`;
+
+
+export const ToggleItem = styled.View`
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+`;
 
 export const styles = StyleSheet.create({
   commonInputStyle: {
