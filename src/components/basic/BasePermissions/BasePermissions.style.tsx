@@ -1,5 +1,5 @@
-import styled, { css } from 'styled-components/native'
-import { StyleSheet } from 'react-native';
+import styled, {css} from 'styled-components/native';
+import {StyleSheet} from 'react-native';
 
 // Container for the entire screen
 export const Container = styled.View`
@@ -46,15 +46,19 @@ export const PermissionItem = styled.View`
 // Permission item text container
 export const PermissionTextContainer = styled.View`
   flex: 1;
-  padding-left: 15px;
+  padding-left: 5px;
 `;
 
+export const PermissionTitleContainer = styled.View`
+  flex-direction: row;
+`;
 // Permission title
 export const PermissionTitle = styled.Text`
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #333;
   margin-bottom: 5px;
+  margin-left: 5px;
 `;
 
 // Permission description
