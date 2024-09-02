@@ -29,6 +29,10 @@ const IconNames = {
   notificationBox: {path: require('./notification-box.svg').default},
   user: {path: require('./user-profile-03.svg').default},
   users: {path: require('./users-profiles-02.svg').default},
+  apple: {path: require('./apple.svg').default},
+  fitbit: {path: require('./fitbit.svg').default},
+  garmin: {path: require('./garmin.svg').default},
+  whoop: {path: require('./whoop.svg').default},
 }
 
 export type IconName = keyof typeof IconNames
