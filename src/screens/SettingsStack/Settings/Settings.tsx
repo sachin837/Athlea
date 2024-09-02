@@ -27,6 +27,7 @@ import {Icons} from '../../../assets/icons'
 import {PersonalDetails} from './PersonalDetails'
 import BottomSheet from '@gorhom/bottom-sheet'
 import {Notifications} from './Notifications'
+import { DeviceIntegration } from './DeviceIntegration'
 
 export const Settings = () => {
   const theme = useTheme()
@@ -41,6 +42,9 @@ export const Settings = () => {
     notificationSheetRef,
     openNotificationSheet,
     closeNotificationSheet,
+    deviceSheetRef,
+    openDeviceSheet,
+    closeDeviceSheet,
   } = useSettings()
   useEffect(() => {
     setIsSwitchOn(isTheme === 'dark')
@@ -86,7 +90,7 @@ export const Settings = () => {
       {
         title: 'Device integration',
         icon: 'bluetooth',
-        onPress: () => navigation.navigate(RouteNames.editProfile),
+        onPress: openDeviceSheet,
       },
       {
         title: 'Payment',
@@ -240,6 +244,15 @@ export const Settings = () => {
         snapPoints={snapPoints}
         handleComponent={() => null}>
         <Notifications onClose={closeNotificationSheet} />
+      </BottomSheet>
+      <BottomSheet
+        index={-1}
+        ref={deviceSheetRef}
+        enablePanDownToClose
+        topInset={insets.top}
+        snapPoints={snapPoints}
+        handleComponent={() => null}>
+        <DeviceIntegration onClose={closeDeviceSheet} />
       </BottomSheet>
     </SafeAreaView>
   )
