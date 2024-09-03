@@ -11,6 +11,8 @@ export const RouteNames = {
   threads: 'Threads',
 
   authStack: 'AuthStack',
+  appStack: 'AppStack',
+  authLoading: 'AuthLoading',
   login: 'Login',
   signup: 'Signup',
   onboarding: 'Onboarding',

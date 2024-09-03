@@ -6,7 +6,7 @@ import {
 } from '@react-navigation/stack'
 import {NavigationContainer} from '@react-navigation/native'
 import {RouteNames} from '../../_constants'
-import {View} from 'react-native'
+import { ChangePassword, EditProfile, Settings } from 'screens'
 
 const Stack = createStackNavigator()
 
@@ -27,7 +27,12 @@ export const SettingsStackNavigator = () => {
   return (
     <NavigationContainer independent>
       <Stack.Navigator screenOptions={screenOptions}>
-        <Stack.Screen name={RouteNames.settings} component={View} />
+        <Stack.Screen name={RouteNames.settings} component={Settings} />
+        <Stack.Screen name={RouteNames.editProfile} component={EditProfile} />
+          <Stack.Screen
+            name={RouteNames.changePassword}
+            component={ChangePassword}
+          />
       </Stack.Navigator>
     </NavigationContainer>
   )
