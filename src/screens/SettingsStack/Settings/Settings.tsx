@@ -1,5 +1,4 @@
 import React, {useMemo, useState, useEffect} from 'react'
-import {DevSettings} from 'react-native'
 import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {RouteNames} from '_constants'
@@ -136,8 +135,7 @@ export const Settings = () => {
     const resultAction = await dispatch(onSignOut())
     if (onSignOut.fulfilled.match(resultAction)) {
       await AsyncStorage.clear()
-      // navigation.navigate(RouteNames.authStack)
-      DevSettings.reload()
+      navigation.replace(RouteNames.authLoading)
     }
   }
   return (
