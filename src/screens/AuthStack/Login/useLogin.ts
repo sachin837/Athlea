@@ -52,7 +52,7 @@ export const useLogin = () => {
         if (result.error) {
           loginErrorHandeling(result.payload)
         } else {
-          authContext.dispatch('registered')
+          authContext.dispatch('login')
           navigation.navigate(RouteNames.homeTabs)
         }
       })

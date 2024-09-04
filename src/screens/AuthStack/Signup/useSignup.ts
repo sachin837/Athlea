@@ -7,6 +7,7 @@ import {AuthErrorResponse} from '../../../model/authentication'
 import {onSignInWithCredential, onSignUp, store, useAppDispatch, useAppSelector} from '../../../store'
 import {DataTypes, Email, ErrorType, FormikTypes, Password} from './types'
 import {RouteNames, ValidationSchemes} from '../../../_constants'
+import AsyncStorage from '@react-native-async-storage/async-storage'
 
 export const useSignup = () => {
   const navigation = useNavigation()
@@ -77,9 +78,13 @@ export const useSignup = () => {
     if (onValidate(data)) {
       setIsSubmitPress(true)
       dispatch(onSignUp(data))
-        .then(response => {
+        .then(async response => {
           const result = response as any
           if (onSignUp.fulfilled.match(result)) {
+            await AsyncStorage.setItem(
+              'registered',
+              'true',
+            );
             navigation.navigate(RouteNames.onboarding)
           } else {
             signUpErrorHandeling(result.payload, data.email)
