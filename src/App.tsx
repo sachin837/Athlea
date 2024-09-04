@@ -83,13 +83,14 @@ function App() {
           }
 
           await AsyncStorage.setItem('userEmail', String(userData?.email));
+          const isRegistered = await AsyncStorage.getItem('registered');
 
           // Start account setup
           if (isNewUser) {
             setLoginStatus('noAccount');
           }
 
-          if (!isNewUser) {
+          if (!isNewUser && !Boolean(isRegistered)) {
             setLoginStatus('authenticated');
           }
 
@@ -116,15 +117,18 @@ function App() {
   const authContext: AuthContextProps = {
     dispatch: async (action: AuthAction) => {
       switch (action) {
-        case 'wakeUp':
-          break;
-        case 'paired':
-        case 'registered':
-          setLoginStatus('authenticated');
-          break;
-        case 'reset':
-          setLoginStatus('unknown');
-          break;
+      case 'wakeUp':
+        break;
+      case 'paired':
+      case 'registered':
+        setLoginStatus('registered');
+        break;
+      case 'login':
+        setLoginStatus('authenticated');
+        break;
+      case 'reset':
+        setLoginStatus('unknown');
+        break;
       }
     },
   };

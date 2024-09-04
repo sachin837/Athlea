@@ -11,8 +11,10 @@ import {
   AddNewActivity,
   EditActivity,
   Chat,
+  Settings,
+  EditProfile,
+  ChangePassword,
 } from '../screens'
-import {SettingsStackNavigator} from './group/settingsStack'
 import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import { useSwipeContext } from 'contexts/SwipeContext'
 
@@ -30,9 +32,11 @@ export const AppStack = () => {
         }}
       />
 
+      <App.Screen name={RouteNames.settings} component={Settings} />
+      <App.Screen name={RouteNames.editProfile} component={EditProfile} />
       <App.Screen
-        name={RouteNames.settings}
-        component={SettingsStackNavigator}
+        name={RouteNames.changePassword}
+        component={ChangePassword}
       />
       <App.Screen
         name={RouteNames.trainingPlanArrangement}

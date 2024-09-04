@@ -40,6 +40,9 @@ import AddTrainingPlanContent from 'components/legacy/content/addTrainingPlanCon
 import BluetoothSelectionComp from 'components/legacy/bluetoothSelector'
 import firestore from '@react-native-firebase/firestore'
 import auth from '@react-native-firebase/auth'
+import { AuthContext } from 'utils'
+import AsyncStorage from '@react-native-async-storage/async-storage'
+import { RouteNames } from '_constants'
 
 
 export const Onboarding = () => {
@@ -449,7 +452,12 @@ export const Onboarding = () => {
   const [isBottomSheetVisible, setIsBottomSheetVisible] = React.useState(false)
 
   const gradientColors = ['#6a11cb', '#2575fc'] // Choose your specific colors
-
+  const authContext = useContext(AuthContext)
+  const onBack = async () => {
+    await AsyncStorage.removeItem('registered');
+    authContext.dispatch('login')
+    navigation.navigate(RouteNames.authLoading);
+  }
   return (
     <>
       <SafeAreaView style={{flex: 1, backgroundColor: 'white'}}>
@@ -459,7 +467,7 @@ export const Onboarding = () => {
             size={18}
             backgroundColor="red"
             borderColor={theme.primaryscale[4]}
-            onPress={() => navigation.navigate('Home')}
+            onPress={onBack}
           />
         </HeaderContainer>
         {/* Wrap the View with TouchableOpacity to detect taps */}
