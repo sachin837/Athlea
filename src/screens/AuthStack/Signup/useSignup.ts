@@ -85,6 +85,8 @@ export const useSignup = () => {
               'registered',
               'true',
             );
+            const user = auth().currentUser
+            user.updateProfile({displayName: data.email.split('@')[0]}).then(auth().currentUser.reload())
             navigation.navigate(RouteNames.onboarding)
           } else {
             signUpErrorHandeling(result.payload, data.email)
