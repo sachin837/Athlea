@@ -15,6 +15,7 @@ import {
   ProfileListItem,
 } from './Settings.style'
 import {useNavigation} from '@react-navigation/native'
+import auth from '@react-native-firebase/auth'
 import {useTheme} from 'styled-components/native'
 import {useThemes} from '../../../contexts/ThemeContext'
 import {onSignOut, useAppDispatch} from 'store'
@@ -32,6 +33,8 @@ export const Settings = () => {
   const theme = useTheme()
   const {isTheme, setIsTheme} = useThemes()
   const [isSwitchOn, setIsSwitchOn] = useState(isTheme === 'dark')
+  const [profileImage, setProfileImage] = useState(null)
+  const [name, setName] = useState('michwilf')
   const insets = useSafeAreaInsets()
   const {
     profileSheetRef,
@@ -55,7 +58,6 @@ export const Settings = () => {
     setIsSwitchOn(newTheme === 'dark')
   };
 
-  const name = 'michwilf'
   const navigation = useNavigation()
   const dispatch = useAppDispatch()
 
@@ -138,6 +140,17 @@ export const Settings = () => {
       navigation.replace(RouteNames.authLoading)
     }
   }
+  const getUserDetails = async () => {
+    const user = auth().currentUser
+    const userId = user?.uid
+    if (userId) {
+      setProfileImage(user?.photoURL)
+      setName(user?.displayName)
+    }
+  }
+  useEffect(()=>{
+    getUserDetails()
+  },[])
   return (
     <SafeAreaView style={{flex: 1, backgroundColor: theme.pageBackground}}>
       <BackHeader />
@@ -148,7 +161,7 @@ export const Settings = () => {
               size={100}
               letter={name[0].toUpperCase()}
               // backgroundColor={'#e1e1e1'}
-              source={require('../../../assets/images/people/RandomImage1.png')}
+              source={profileImage ? {uri:profileImage} : require('../../../assets/images/people/RandomImage1.png')}
             />
             <Text
               color={Colors.black1}
@@ -156,7 +169,7 @@ export const Settings = () => {
               weight="700"
               size={18}
               centered>
-              Charlie Cooper
+              {name}
             </Text>
           </AvatarContainer>
           <ProfileListItem onPress={openProfileSheet}>
