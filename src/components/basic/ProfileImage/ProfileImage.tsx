@@ -12,7 +12,7 @@ export const ProfileImage:FC<ProfileImageProps> = (props) => {
     return (
         <TouchableOpacity disabled={!props.edit} onPress={props.onPress}>
             <Container style={[props.style, {width: props.size, height: props.size, backgroundColor: props.backgroundColor}]}>
-                {!!props.source && <Image source={props.source} style={{width: props.size, height: props.size}} />}
+                {!!props.source && <Image source={props.source} borderRadius={100} style={{width: props.size, height: props.size}} />}
                 {!props.source && (
                     <AvatarLetter style={{fontSize}}>{props.letter}</AvatarLetter>
                 )}

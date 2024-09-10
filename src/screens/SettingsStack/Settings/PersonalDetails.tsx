@@ -80,7 +80,7 @@ export const PersonalDetails = ({onClose}) => {
       }
     }
 
-    const filename = `user-profile/${user.uid}/${Date.now()}.jpg`
+    const filename = `user-profile/${user.uid}/${Date.now()}_${profileImage.name}`
     const reference = storage().ref(filename)
 
     try {
