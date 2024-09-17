@@ -1,64 +1,62 @@
-import {createSlice, nanoid, PayloadAction} from '@reduxjs/toolkit';
+import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit'
+import axios from 'axios'
 
-interface NotificationMessage {
-  boldPart: string;
-  normalPart: string;
+interface NotificationItem {
+  title: string;
+  description: string;
 }
 
-interface LogEntry {
-  id: string;
-  message: NotificationMessage;
-  type: string;
-  deviceType: string;
-  timestamp: string;
+interface UserNotifications {
+  [date: string]: NotificationItem[];
 }
 
 interface NotificationState {
-  message: NotificationMessage;
-  type: string;
-  isVisible: boolean;
-  log: LogEntry[];
+  user_notifications: UserNotifications;
 }
 
 const initialState: NotificationState = {
-  message: {boldPart: '', normalPart: ''},
-  type: 'info', // Default notification type
-  isVisible: false,
-  log: [], // Logs of all notifications
-};
+  user_notifications: {},
+}
+
+export const loadNotifications = createAsyncThunk<UserNotifications, string>(
+  'notification/usernotifications',
+  async (userId: string, thunkAPI) => {
+    try {
+      const response = await axios.get(`/api/notifications?user_id=${userId}`)
+      console.log('notification response', response.data)
+      return response.data.user_notifications
+    } catch (error) {
+      console.error('Failed to load notifications from backend:', error)
+      return thunkAPI.rejectWithValue(error)
+    }
+  },
+)
 
 const notificationSlice = createSlice({
   name: 'notification',
   initialState,
   reducers: {
-    showNotification: (
-      state,
-      action: PayloadAction<{
-        message: NotificationMessage;
-        type?: string;
-        deviceType?: string;
-      }>,
-    ) => {
-      const {message, type, deviceType} = action.payload;
-      state.message = message;
-      state.type = type || 'info';
-      state.isVisible = true;
-      state.log.push({
-        id: nanoid(),
-        message: message,
-        type: type || 'info',
-        deviceType: deviceType || '',
-        timestamp: new Date().toISOString(),
-      });
+    addNotification(state, action: PayloadAction<UserNotifications>) {
+      state.user_notifications = {
+        ...state.user_notifications,
+        ...action.payload,
+      }
     },
-    hideNotification: state => {
-      state.isVisible = false;
+    addSingleNotification(state, action: PayloadAction<NotificationItem>) {
+      const currentDate = new Date().toLocaleDateString()
+      if (!state.user_notifications[currentDate]) {
+        state.user_notifications[currentDate] = []
+      }
+      state.user_notifications[currentDate].push(action.payload)
     },
   },
-});
+  extraReducers: (builder) => {
+    builder.addCase(loadNotifications.fulfilled, (state, action) => {
+      state.user_notifications = action.payload
+    })
+  },
+})
 
-// Export the action creators
-export const {showNotification, hideNotification} = notificationSlice.actions;
-
-// Export the reducer
-export default notificationSlice.reducer;
+export const { addNotification, addSingleNotification } =
+  notificationSlice.actions
+export default notificationSlice.reducer
