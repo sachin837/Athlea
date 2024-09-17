@@ -24,6 +24,11 @@ import favoritesReducer from './favorites';
 import userDataFromAuthReducer from './user/authUser';
 import jobReducer from './jobs';
 import chatReducer from './chat';
+// import taskReducer from './task';
+// import taskMessageReducer from './taskMessage';
+// import calendarReducer from './calendar';
+// import colorModeReducer from './colorMode';
+// import sessionReducer from './session';
 // import usersReducer from './user'
 
 const reducer = combineReducers({

@@ -12,7 +12,7 @@ import {
 } from './navigation/rootNavigator';
 import theme from './theme';
 import {Provider, useDispatch, useSelector} from 'react-redux';
-import {onRefreshToken, store} from './store';
+import {onRefreshToken, store} from 'store';
 import {FilterProvider} from './contexts/FilterContext';
 import {SwipeProvider} from './contexts/SwipeContext';
 import {AdditionalResponsesProvider} from './contexts/AdditonalResponseContext';
