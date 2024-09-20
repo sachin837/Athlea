@@ -53,7 +53,7 @@ export const useLogin = () => {
           loginErrorHandeling(result.payload)
         } else {
           authContext.dispatch('login')
-          navigation.navigate(RouteNames.homeTabs)
+          navigation.navigate(RouteNames.authLoading)
         }
       })
       .catch(error => {
