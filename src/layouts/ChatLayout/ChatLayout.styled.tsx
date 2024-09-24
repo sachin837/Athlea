@@ -11,6 +11,7 @@ export const SendContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  margin-bottom:5px;
 `
 export const TypingContainer = styled.View`
 margin-bottom:30px;
@@ -61,4 +62,5 @@ export const styles = StyleSheet.create({
     height: 100,
     borderRadius: 10,
   },
+  
 })
