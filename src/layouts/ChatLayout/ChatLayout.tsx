@@ -1,4 +1,4 @@
-import {FC, useCallback} from 'react'
+import {FC, useCallback, useState} from 'react'
 import {
   GiftedChat,
   InputToolbar,
@@ -6,13 +6,14 @@ import {
   MessageProps,
   Send, SendProps,
   MessageImageProps,
+  Composer,
 } from 'react-native-gifted-chat'
 import {Button, Message} from '../../components'
 import {Icons} from '../../assets/icons'
 import type {Message as CustomMessage, FileMessage} from 'model/chat'
 import {MainContainer, SendContainer, TypingContainer, styles} from './ChatLayout.styled'
 import {InputTypes, UseChatLayoutType} from './useChatLayout'
-import { Image, SafeAreaView, TouchableOpacity } from 'react-native'
+import { Image, SafeAreaView, TextInput, TouchableOpacity, View } from 'react-native'
 import { Colors } from 'theme'
 import { Images } from '../../assets/images'
 import BasePermissions from 'components/basic/BasePermissions/BasePermissions'
@@ -25,6 +26,7 @@ interface Props extends UseChatLayoutType {
 }
 
 export const ChatLayout:FC<Props> = (props) => {
+  const [isFocused, setIsFocused] = useState(false)
   const renderMessage = useCallback((itemProps:  MessageProps<CustomMessage>) => (
     <Message {...itemProps} />
   ), [])
@@ -32,7 +34,7 @@ export const ChatLayout:FC<Props> = (props) => {
   const renderInputToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (
     <InputToolbar
       {...toolbarProps}
-      containerStyle={styles.inputToolbar}
+      containerStyle={[styles.inputToolbar,{ borderColor: isFocused ? Colors.purple : '#e3e3e3' }]}
       {
         ...(props.microphoneVisible
           ? {
@@ -45,7 +47,7 @@ export const ChatLayout:FC<Props> = (props) => {
           : {})
       }
     />
-  ),[])
+  ),[isFocused, props.microphoneOpen, props.microphoneVisible])
 
   const renderConfirmToolbar = useCallback((toolbarProps: InputToolbarProps<CustomMessage>) => (
     <SafeAreaView edges={['bottom']} style={{paddingHorizontal: 20}}>
@@ -62,7 +64,7 @@ export const ChatLayout:FC<Props> = (props) => {
     default:
       return renderInputToolbar(toolbarProps)
     }
-  }, [props.inputType])
+  }, [props.inputType, renderConfirmToolbar, renderInputToolbar])
 
   const renderSend = useCallback((sendProps:SendProps<CustomMessage>) => (
     <SendContainer>
@@ -73,7 +75,7 @@ export const ChatLayout:FC<Props> = (props) => {
         <Icons name={'arrowUp'} color={'white'} size={25} />
       </Send>
     </SendContainer>
-  ), [])
+  ), [props.handleAttachment])
   const renderMessageFile = useCallback((fileProps: MessageImageProps<FileMessage>) => {
     const { currentMessage } = fileProps
 
@@ -119,7 +121,7 @@ export const ChatLayout:FC<Props> = (props) => {
           isTyping={props.isTyping}
           shouldUpdateMessage={() => true}
           renderFooter={renderFooter}
-          textInputProps={{placeholder: 'Tell Athlea your goal...',color:Colors.black1}}
+          textInputProps={{placeholder: 'Tell Athlea your goal...',color:Colors.black1,fontSize:17, onFocus:()=>setIsFocused(true), onBlur:()=>setIsFocused(false)}}
         />
         <Modal
           visible={props.isVisible}
