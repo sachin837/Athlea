@@ -22,7 +22,8 @@ export const InputContainer = styled.View<{focused?: boolean, error?: boolean}>`
 export const StyledInput = styled.TextInput<{icon?: boolean}>`
   ${({theme, ...props}) => css`
     flex: 1;
-    margin-right: ${props.icon ? 10 : 0}px
+    margin-right: ${props.icon ? 10 : 0}px;
+    height:45px;
   `}
 `
 

@@ -7,7 +7,7 @@ type LoginStatus =
   | 'components'
   | 'pairing';
 
-type AuthAction = 'registered' | 'reset' | 'wakeUp' | 'paired';
+type AuthAction = 'registered' | 'reset' | 'wakeUp' | 'paired' | 'login';
 
 type Routes =
   | 'Welcome'

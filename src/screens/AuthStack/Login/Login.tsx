@@ -1,8 +1,6 @@
 import React from 'react'
-import {GoogleSignin} from '@react-native-google-signin/google-signin'
 import {useNavigation} from '@react-navigation/native'
 import {useTheme} from 'styled-components/native'
-import auth from '@react-native-firebase/auth'
 import {
   StyledContainer,
   TopContainer,
@@ -16,7 +14,6 @@ import {
   styles,
 } from './Login.styles'
 import {RouteNames} from '_constants'
-import {onSignInWithCredential, store} from 'store'
 import {TextInput, Text, Divider, Button } from 'components'
 import {FormikTypes} from './types'
 import {useLogin} from './useLogin'
@@ -33,52 +30,13 @@ type LoginViewProps = {
 export const Login = () => {
   const theme = useTheme()
   const navigation = useNavigation()
-  const {formik, loading} = useLogin()
+  const {formik, loading, onGoogleSignIn} = useLogin()
   const {
     handleSubmit,
     handleChange,
     values,
     handleBlur,
   } = formik
-
-  const onSignIn = async () => {
-    try {
-      await GoogleSignin.hasPlayServices()
-      const {idToken} = await GoogleSignin.signIn()
-      const credentials = auth.GoogleAuthProvider.credential(idToken)
-      await store.dispatch(onSignInWithCredential(credentials))
-      navigation.navigate(RouteNames.homeTabs)
-    } catch (error) {
-      switch (error.code) {
-      case 'DEVELOPER_ERROR':
-        console.error('Developer error, check your settings:', error)
-        break
-      case 'NETWORK_ERROR':
-        console.error(
-          'Network error, check your internet connection:',
-          error,
-        )
-        break
-      case 'SIGN_IN_CANCELLED':
-        console.error('Sign-in cancelled by user:', error)
-        break
-      case 'PLAY_SERVICES_NOT_AVAILABLE':
-        console.error(
-          'Google Play services not available or outdated:',
-          error,
-        )
-        break
-      case 'ERROR_ACCOUNT_NOT_FOUND':
-        console.error('No Google account found on the device:', error)
-        break
-      case 'ERROR_INVALID_CREDENTIAL':
-        console.error('Invalid credentials:', error)
-        break
-      default:
-        console.error('Error signing in with Google:', error)
-      }
-    }
-  }
 
 
   return (
@@ -100,7 +58,7 @@ export const Login = () => {
 
         <MiddleContainer>
           <SocialButtonContainer>
-            <SocialButton onPress={onSignIn}>
+            <SocialButton onPress={onGoogleSignIn}>
               <SocialImage source={Images.google} />
             </SocialButton>
             <SocialButton>
@@ -124,7 +82,6 @@ export const Login = () => {
               autoCapitalize="none"
               keyboardType={'email-address'}
               inputStyle={styles.emailInput}
-              inputContainer={{ height: 50,}}
             />
             <TextInput
               label={'Password'}

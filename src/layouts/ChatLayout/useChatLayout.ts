@@ -18,6 +18,7 @@ export const useChatLayout = () => {
   const [inputType, setInputType] = useState<InputTypes>(InputTypes.text)
   const [messages, setMessages] = useState<CustomMessage[]>([])
   const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [isTyping, setIsTyping] = useState<boolean>(false)
   
 
   const openPermissioSheet = () => setIsVisible(true)
@@ -98,6 +99,7 @@ export const useChatLayout = () => {
     isVisible,
     openPermissioSheet,
     closePermissioSheet,
+    isTyping,
   }
 }
 

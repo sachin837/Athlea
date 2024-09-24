@@ -7,17 +7,17 @@ import {
   Send, SendProps,
   MessageImageProps,
 } from 'react-native-gifted-chat'
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
 import {Button, Message} from '../../components'
 import {Icons} from '../../assets/icons'
 import type {Message as CustomMessage, FileMessage} from 'model/chat'
-import {MainContainer, SendContainer, styles} from './ChatLayout.styled'
+import {MainContainer, SendContainer, TypingContainer, styles} from './ChatLayout.styled'
 import {InputTypes, UseChatLayoutType} from './useChatLayout'
-import { Image, TouchableOpacity } from 'react-native'
+import { Image, SafeAreaView, TouchableOpacity } from 'react-native'
 import { Colors } from 'theme'
 import { Images } from '../../assets/images'
 import BasePermissions from 'components/basic/BasePermissions/BasePermissions'
 import { Modal } from 'react-native'
+import TypingIndicator from 'components/basic/TypingIndicator'
 
 interface Props extends UseChatLayoutType {
   microphoneOpen:()=>void;
@@ -25,7 +25,6 @@ interface Props extends UseChatLayoutType {
 }
 
 export const ChatLayout:FC<Props> = (props) => {
-  const insets = useSafeAreaInsets();
   const renderMessage = useCallback((itemProps:  MessageProps<CustomMessage>) => (
     <Message {...itemProps} />
   ), [])
@@ -64,7 +63,7 @@ export const ChatLayout:FC<Props> = (props) => {
       return renderInputToolbar(toolbarProps)
     }
   }, [props.inputType])
-  
+
   const renderSend = useCallback((sendProps:SendProps<CustomMessage>) => (
     <SendContainer>
       <TouchableOpacity style={{marginRight:5}} onPress={props.handleAttachment}>
@@ -93,6 +92,16 @@ export const ChatLayout:FC<Props> = (props) => {
 
     return null
   },[])
+  const renderFooter = (props) => {
+    if (props.isTyping) {
+      return (
+        <TypingContainer>
+          <TypingIndicator />
+        </TypingContainer>
+      )
+    }
+    return null
+}
   return (
     <MainContainer>
       <SafeAreaView style={{flex: 1}} edges={['bottom']}>
@@ -107,6 +116,9 @@ export const ChatLayout:FC<Props> = (props) => {
           listViewProps={{
             contentContainerStyle: styles.messagesContainer,
           }}
+          isTyping={props.isTyping}
+          shouldUpdateMessage={() => true}
+          renderFooter={renderFooter}
           textInputProps={{placeholder: 'Tell Athlea your goal...',color:Colors.black1}}
         />
         <Modal

@@ -1,5 +1,5 @@
 import React, {useMemo, useState, useEffect} from 'react'
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context'
+import { useSafeAreaInsets} from 'react-native-safe-area-context'
 import Icon from 'react-native-vector-icons/Ionicons'
 import {RouteNames} from '_constants'
 import {
@@ -28,6 +28,7 @@ import {PersonalDetails} from './PersonalDetails'
 import BottomSheet from '@gorhom/bottom-sheet'
 import {Notifications} from './Notifications'
 import { DeviceIntegration } from './DeviceIntegration'
+import { View } from 'react-native'
 
 export const Settings = () => {
   const theme = useTheme()
@@ -152,7 +153,7 @@ export const Settings = () => {
     getUserDetails()
   },[])
   return (
-    <SafeAreaView style={{flex: 1, backgroundColor: theme.pageBackground}}>
+    <View style={{flex: 1, backgroundColor: theme.pageBackground}}>
       <BackHeader />
       <Container>
         <ProfileHeader>
@@ -265,6 +266,6 @@ export const Settings = () => {
         handleComponent={() => null}>
         <DeviceIntegration onClose={closeDeviceSheet} />
       </BottomSheet>
-    </SafeAreaView>
+    </View>
   )
 };
