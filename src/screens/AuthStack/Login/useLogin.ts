@@ -6,7 +6,9 @@ import {onSignIn, useAppDispatch, useAppSelector} from '../../../store'
 import {AuthContext} from '../../../utils'
 import {useNavigation} from '@react-navigation/native'
 import {RouteNames, ValidationSchemes} from '../../../_constants'
-
+import {GoogleSignin} from '@react-native-google-signin/google-signin'
+import auth from '@react-native-firebase/auth'
+import {onSignInWithCredential, store} from 'store'
 
 export const useLogin = () => {
   const navigation = useNavigation()
@@ -53,7 +55,7 @@ export const useLogin = () => {
           loginErrorHandeling(result.payload)
         } else {
           authContext.dispatch('login')
-          navigation.navigate(RouteNames.authLoading)
+          navigation.navigate(RouteNames.homeTabs)
         }
       })
       .catch(error => {
@@ -83,9 +85,48 @@ export const useLogin = () => {
     },
     onSubmit: data => onSubmit(data),
   })
-
+  const onGoogleSignIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices()
+      const {idToken} = await GoogleSignin.signIn()
+      const credentials = auth.GoogleAuthProvider.credential(idToken)
+      await store.dispatch(onSignInWithCredential(credentials))
+      authContext.dispatch('login')
+      navigation.navigate(RouteNames.homeTabs)
+    } catch (error) {
+      switch (error.code) {
+      case 'DEVELOPER_ERROR':
+        console.error('Developer error, check your settings:', error)
+        break
+      case 'NETWORK_ERROR':
+        console.error(
+          'Network error, check your internet connection:',
+          error,
+        )
+        break
+      case 'SIGN_IN_CANCELLED':
+        console.error('Sign-in cancelled by user:', error)
+        break
+      case 'PLAY_SERVICES_NOT_AVAILABLE':
+        console.error(
+          'Google Play services not available or outdated:',
+          error,
+        )
+        break
+      case 'ERROR_ACCOUNT_NOT_FOUND':
+        console.error('No Google account found on the device:', error)
+        break
+      case 'ERROR_INVALID_CREDENTIAL':
+        console.error('Invalid credentials:', error)
+        break
+      default:
+        console.error('Error signing in with Google:', error)
+      }
+    }
+  }
   return {
     formik,
     loading,
+    onGoogleSignIn,
   }
 }

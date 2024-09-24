@@ -42,7 +42,7 @@ export const MessageBubble:FC<Props> = (props) => {
           backgroundColor: theme.messageRightBubble,
           borderWidth: 1,
           borderColor: theme.messageRightBubble,
-          margin: -6,
+          margin: -3,
           padding:2,
           marginRight:2,
         },

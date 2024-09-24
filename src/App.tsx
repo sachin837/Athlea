@@ -1,7 +1,5 @@
 import {BottomSheetModalProvider} from '@gorhom/bottom-sheet';
-import {NavigationContainer} from '@react-navigation/native';
 import React, {useEffect, useState} from 'react';
-import {Button} from 'react-native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {DeviceOrientationProvider} from './contexts/DeviceOrientationContext';
 import {NotificationsProvider} from './contexts/NotificationsContext';
@@ -32,6 +30,7 @@ import {setUserDataFromAuth} from './store/user/authUser';
 import {AuthUserResponse} from './model/user';
 import {KeyboardProvider} from 'react-native-keyboard-controller';
 import {UserThemeProvider, useThemes} from './contexts/ThemeContext';
+import SplashView from 'screens/Splash/SplashView';
 
 const toastConfig = {
   custom: props => <CustomToast {...props} />,
@@ -51,7 +50,7 @@ interface AuthContextProps {
 function App() {
   const [initializing, setInitializing] = useState<boolean>(true);
   const [loginStatus, setLoginStatus] = useState<LoginStatus>('unknown');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [permissions, setPermissions] = useState({});
 
   const onAuthState = async (userData: AuthUserResponse) => {
@@ -132,6 +131,9 @@ function App() {
       }
     },
   };
+  if (isLoading) {
+    return <SplashView />;
+  }
   return (
     <Provider store={store}>
       <KeyboardProvider>

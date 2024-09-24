@@ -1,22 +1,33 @@
-import styled from 'styled-components/native';
-
-export const StyledContainer = styled.View`
-  flex: 1;
-  background-color: #fff;
-  padding: 25px;
-`;
+import styled from 'styled-components/native'
 
 export const Container = styled.View`
   flex: 1;
-  flex-direction: row;
-  justify-content: center; /* Updated */
-  align-items: center; /* Updated */
-  background-color: #fff;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
 `;
 
-export const StyledTitle = styled.Text`
-  color: #000;
-  font-size: 35px; /* Adjust as per your design */
-  font-weight: 600;
-  margin-top: 4px;
+export const LogoContainer = styled.View`
+  align-items: center;
+  margin-bottom: 30px;
+`;
+
+export const LogoText = styled.Text`
+  font-size: 32px;
+  font-weight: bold;
+  color: #6e00fa; /* Purple color matching the text in the image */
+`;
+
+export const DotsContainer = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+`;
+
+export const Dot = styled.View<{ backgroundColor: string }>`
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+  margin-horizontal: 4px;
+  background-color: ${(props) => props.backgroundColor};
 `;

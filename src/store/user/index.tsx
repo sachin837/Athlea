@@ -138,6 +138,7 @@ export const refetchTrainingProfile = createAsyncThunk(
   },
 )
 
+
 const userSlice = createSlice({
   name: 'userData',
   initialState,

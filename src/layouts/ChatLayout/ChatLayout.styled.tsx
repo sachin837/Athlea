@@ -12,6 +12,10 @@ export const SendContainer = styled.View`
   align-items: center;
   justify-content: space-between;
 `
+export const TypingContainer = styled.View`
+margin-bottom:30px;
+margin-left:10px;
+`
 
 export const styles = StyleSheet.create({
   inputToolbar: {
