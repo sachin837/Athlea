@@ -19,17 +19,55 @@ export const useChatLayout = () => {
   const [messages, setMessages] = useState<CustomMessage[]>([])
   const [isVisible, setIsVisible] = useState<boolean>(false)
   const [isTyping, setIsTyping] = useState<boolean>(false)
-  
+  const [selectedAttachment, setSelectedAttachment] = useState<any>(null);
 
   const openPermissioSheet = () => setIsVisible(true)
 
   const closePermissioSheet = () => setIsVisible(false)
 
   const onSend = useCallback((newMessages:CustomMessage[] = []) => {
-    setMessages(previousMessages =>
-      GiftedChat.append(previousMessages, newMessages),
-    )
-  }, [])
+    
+    const { text } = newMessages[0];
+
+    // If there's no text but there's an attachment, create a message with the attachment
+    if (!text.trim() && selectedAttachment) {
+      const messageWithAttachment = {
+        _id: Math.random().toString(36).substr(2, 9),
+        createdAt: new Date(),
+        user: { _id: 1 },
+        image: selectedAttachment.uri,
+        text: '',
+        file: selectedAttachment?.uri ? {
+          uri: selectedAttachment?.uri,
+          name: selectedAttachment?.name,
+          type: selectedAttachment?.type,
+        } : {},
+      };
+
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, [messageWithAttachment])
+      );
+      setSelectedAttachment(null); // Clear attachment after sending
+    }
+    
+    // If there's text (with or without an attachment), handle accordingly
+    else if (text.trim()) {
+      const messageWithTextAndAttachment = {
+        ...newMessages[0],
+        image: selectedAttachment?.uri || null,
+        file: selectedAttachment?.uri ? {
+          uri: selectedAttachment?.uri,
+          name: selectedAttachment?.name,
+          type: selectedAttachment?.type,
+        } : {},
+      };
+
+      setMessages((previousMessages) =>
+        GiftedChat.append(previousMessages, [messageWithTextAndAttachment])
+      );
+      setSelectedAttachment(null); // Clear attachment after sending
+    }
+  }, [selectedAttachment])
 
   const addAthleaMessage = useCallback((newMessage: {text: string,}) => {
     const athleaMessage: CustomMessage[] = [
@@ -51,6 +89,7 @@ export const useChatLayout = () => {
 
   const handleAttachment = async () => {
     try {
+      Keyboard.dismiss()
       const res = await DocumentPicker.pick({
         type: [DocumentPicker.types.images],
       })
@@ -60,25 +99,11 @@ export const useChatLayout = () => {
         // Convert file path for iOS
         fileUri = decodeURIComponent(fileUri).replace('file://', '');
       }
+      setSelectedAttachment({uri: fileUri,
+        name: res[0].name,
+        type: res[0].type,})
+      
 
-      const message: FileMessage = {
-        _id: Math.random().toString(36).substring(7),
-        text: '', // or you can set a default text, like the file name
-        createdAt: new Date(),
-        user: {
-          _id: 1,
-          name: 'User',
-        },
-        file: {
-          uri: fileUri,
-          name: res.name,
-          type: res.type,
-        },
-        image:fileUri,
-      };
-
-      onSend([message])
-      Keyboard.dismiss()
     } catch (err) {
       if (DocumentPicker.isCancel(err)) {
         console.log('User cancelled the picker');
@@ -100,6 +125,8 @@ export const useChatLayout = () => {
     openPermissioSheet,
     closePermissioSheet,
     isTyping,
+    selectedAttachment,
+    setSelectedAttachment,
   }
 }
 

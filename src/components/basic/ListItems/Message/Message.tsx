@@ -35,7 +35,7 @@ export const Message:FC<Props> = (props) => {
   }))
 
   return (
-    <Animated.View style={animatedStyle}>
+    <View style={{marginHorizontal:5}}>
       <DefaultMessage
         {...props}
         renderBubble={renderBubble}
@@ -48,6 +48,6 @@ export const Message:FC<Props> = (props) => {
           />
         )}
       </CustomViewsContainer>
-    </Animated.View>
+    </View>
   )
 }
