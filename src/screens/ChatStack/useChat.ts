@@ -10,6 +10,7 @@ export const useChat = () => {
   const chatSheetRef = useRef<BottomSheet>(null)
 
   const [snapPoints] = useState(['100%'])
+  const [isVisible, setIsVisible] = useState<boolean>(false)
 
   const chatLayoutProps = useChatLayout()
 
@@ -92,5 +93,7 @@ export const useChat = () => {
     closeMicSheet,
     chatLayoutProps,
     backToHome,
+    isVisible,
+    setIsVisible,
   }
 }
