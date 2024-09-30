@@ -83,3 +83,80 @@ export const AIButton = styled.TouchableOpacity<{color: string, selected: boolea
         justify-content: center;
     `}
 `
+export const ModalBackground = styled.View`
+flex: 1;
+justify-content: flex-start;
+align-items: center;
+background-color: rgba(0, 0, 0, 0.4);
+`;
+
+export const ModalContainer = styled.View`
+width: 75%;
+background-color: white;
+margin-top: 110px;
+border-top-left-radius: 10px;
+border-top-right-radius: 10px;
+shadow-color: #000;
+shadow-offset: 0px 4px;
+shadow-opacity: 0.3;
+shadow-radius: 4px;
+elevation: 10;
+`;
+
+export const TitleText = styled.Text`
+font-size: 14px;
+font-weight: 400;
+padding: 15px;
+color:gray;
+margin-bottom: 0px;
+`;
+
+export const ActionItem = styled.TouchableOpacity`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 10px;
+border-top-width: 1px;
+border-top-color: #e5e5e5;
+`;
+export const DeleteContainer = styled.View`
+width: 75%;
+background-color: white;
+margin-top: 0px;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+shadow-color: #000;
+shadow-offset: 0px 4px;
+shadow-opacity: 0.3;
+shadow-radius: 4px;
+elevation: 10;
+`;
+export const ActionItemDelete = styled.TouchableOpacity`
+flex-direction: row;
+align-items: center;
+justify-content: space-between;
+padding: 10px;
+margin-bottom: 3px;
+`;
+
+export const ActionText = styled.Text`
+font-size: 16px;
+color: #333;
+margin-left: 10px;
+`;
+
+export const DeleteText = styled.Text`
+font-size: 16px;
+color: red;
+margin-left: 10px;
+`;
+
+export const CloseButton = styled.TouchableOpacity`
+padding: 10px 0;
+align-items: center;
+`;
+
+export const CloseButtonText = styled.Text`
+font-size: 16px;
+color: #007aff;
+`;
