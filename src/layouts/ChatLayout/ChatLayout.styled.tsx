@@ -22,6 +22,8 @@ margin-left:10px;
 export const ComposerContainer = styled.View`
 flex-direction: column;
 flex: 1;
+justify-content: center;
+margin-top:8px;
 `;
 
 export const AttachmentContainer = styled.View`
