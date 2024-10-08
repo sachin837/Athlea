@@ -16,6 +16,10 @@ import {
   ActionItemDelete,
   DeleteText,
   DeleteContainer,
+  AthleaContainer,
+  AIContainerHeader,
+  AIButtonHeader,
+  TrainingItem,
 } from './Chat.styled'
 import {Text} from '../../../components'
 import {ChatLayout} from '../../../layouts'
@@ -40,6 +44,8 @@ export const Chat = () => {
     backToHome,
     isVisible,
     setIsVisible,
+    isVisibleTraining,
+    setIsVisibleTraining,
   } = useChat()
 
   const aiButtons = useMemo(
@@ -53,6 +59,17 @@ export const Chat = () => {
     ],
     [],
   )
+  const trainingOptions = useMemo(
+    () => [
+      {label: 'Running', value: 'r', icon: 'running'},
+      {label: 'Cycling', value: 'c', icon: 'cycling'},
+      {label: 'Gym', value: 'g', icon: 'strength'},
+      {label: 'Skiing', value: 's', icon: 'skiing'},
+      {label: 'Swimming', value: 'sw', icon: 'swimming'},
+      {label: 'Table Tennis', value: 't', icon: 'tennis'},
+    ],
+    [],
+  )
 
   return (
     <>
@@ -61,8 +78,22 @@ export const Chat = () => {
           <TouchableOpacity onPress={backToHome}>
             <Icons name={'cross'} size={24} color={Colors.black4} />
           </TouchableOpacity>
-          <Text onPress={() => setIsVisible(true)} size={22} color={Colors.black1}>athlea</Text>
-          <Icons name={'share'} size={24} color={Colors.black4} />
+          <AthleaContainer>
+            {/* <Text centered onPress={() => setIsVisible(true)} size={22} color={Colors.black1}>athlea</Text> */}
+            <AIContainerHeader>
+              {aiButtons.map(button => (
+                <AIButtonHeader color={button.color} selected={false}>
+                  <Icons name={button.icon} size={16} color={Colors.white} />
+                </AIButtonHeader>
+              ))}
+              <TouchableOpacity onPress={() => setIsVisibleTraining(true)}>
+                <Icons name={'chevron'} size={24} color={Colors.blackNew3} />
+              </TouchableOpacity>
+            </AIContainerHeader>
+          </AthleaContainer>
+          <TouchableOpacity onPress={() => setIsVisible(true)}>
+            <Icons name={'share'} size={24} color={Colors.black4} />
+          </TouchableOpacity>
         </Header>
         <ChatLayout {...chatLayoutProps} microphoneOpen={openMicSheet} microphoneVisible={true} />
       </MainContainer>
@@ -138,6 +169,31 @@ export const Chat = () => {
                 <DeleteText>Delete</DeleteText>
                 <Icon name="trash-2" size={20} color="red" />
               </ActionItemDelete>
+            </DeleteContainer>
+          </ModalBackground>
+        </TouchableWithoutFeedback>
+      </Modal>
+      <Modal
+        transparent={true}
+        visible={isVisibleTraining}
+        animationType="fade"
+        onRequestClose={() => setIsVisibleTraining(false)}
+      >
+        <TouchableWithoutFeedback onPress={() => setIsVisibleTraining(false)}>
+          <ModalBackground>
+            <ModalContainer>
+              <TitleText>Choose your current fitness level</TitleText>
+              {trainingOptions.map(item => (
+                <TrainingItem key={item.label} onPress={() => console.log('Share')}>
+                  <Icons name={item.icon} size={16} color={Colors.blackNew3} />
+                  <ActionText>{item.label}</ActionText>
+                </TrainingItem>
+              ))}
+            </ModalContainer>
+            <DeleteContainer>
+              <TrainingItem onPress={() => console.log('Share')}>
+                {/* <ActionText>Select</ActionText> */}
+              </TrainingItem>
             </DeleteContainer>
           </ModalBackground>
         </TouchableWithoutFeedback>

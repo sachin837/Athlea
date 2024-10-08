@@ -17,6 +17,7 @@ import axios from 'axios'
 import Toast from 'react-native-toast-message'
 import { ApiPath } from '../../config/apiPath'
 import { getWebSocket, parseMessage, setWebSocket, updatedPlanName } from 'utils'
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const initialState: ChatState = {
   chatMessages: [],
@@ -127,9 +128,9 @@ export const initChatWebSocket = createAsyncThunk<
             console.log('Websocket connected', jobId)
             setWebSocket(ws)
             dispatch(setJobId(jobId))
-            dispatch(setCoaches(coaches))
-            dispatch(setLastActiveCoach(coaches[0])) // Set the first coach as the initial active coach
-            dispatch(setServiceName(serviceName))
+            dispatch(setChatCoaches(coaches))
+            dispatch(setChatLastActiveCoach(coaches[0])) // Set the first coach as the initial active coach
+            dispatch(setChatServiceName(serviceName))
             dispatch(setIsWebSocketConnected(true))
             if (suggestion && Object.keys(suggestion).length > 0) {
               const newSuggestion = {
@@ -155,7 +156,7 @@ export const initChatWebSocket = createAsyncThunk<
               const currentState = getState().chat
               if (data?.content?.suggestion) {
                 const activeCoach = data.senderName || currentState.lastActiveCoach
-                dispatch(setLastActiveCoach(activeCoach))
+                dispatch(setChatLastActiveCoach(activeCoach))
                 payload = {
                   coaches: currentState.coaches,
                   lastActiveCoach: activeCoach,
@@ -805,12 +806,12 @@ const chatSlice = createSlice({
     setUserInput: (state, action: PayloadAction<string>) => {
       state.userInput = action.payload
     },
-    setTempCoachName: (state, action: PayloadAction<string | null>) => {
+    setTempCoachName: async (state, action: PayloadAction<string | null>) => {
       state.tempCoachName = action.payload
       if (action.payload) {
-        localStorage.setItem('tempCoachName', action.payload)
+        await AsyncStorage.setItem('tempCoachName', action.payload)
       } else {
-        localStorage.removeItem('tempCoachName')
+        await AsyncStorage.removeItem('tempCoachName')
       }
     },
     setCurrentSuggestionBubbleHeight: (
@@ -822,7 +823,7 @@ const chatSlice = createSlice({
     setPendingResponse: (state, action: PayloadAction<boolean>) => {
       state.pendingResponse = action.payload
     },
-    setIsWebSocketReady: (state, action: PayloadAction<boolean>) => {
+    setIsChatWebSocketReady: (state, action: PayloadAction<boolean>) => {
       state.isWebSocketReady = action.payload
     },
     clearLogArray: (state, action: PayloadAction) => {
@@ -839,15 +840,15 @@ const chatSlice = createSlice({
       console.log('systemmessage payload', action.payload)
       state.systemMessages = action.payload
     },
-    setServiceName: (state, action: PayloadAction<string>) => {
+    setChatServiceName: (state, action: PayloadAction<string>) => {
       state.serviceName = action.payload
     },
-    setCoaches: (state, action: PayloadAction<string[]>) => {
+    setChatCoaches: (state, action: PayloadAction<string[]>) => {
       state.coaches = Array.from(
         new Set([...state.coaches, ...action.payload]),
       )
     },
-    setLastActiveCoach: (state, action: PayloadAction<string | null>) => {
+    setChatLastActiveCoach: (state, action: PayloadAction<string | null>) => {
       state.lastActiveCoach = action.payload
       if (action.payload && !state.coaches.includes(action.payload)) {
         state.coaches.push(action.payload)
@@ -860,7 +861,7 @@ const chatSlice = createSlice({
       }
     },
 
-    setCoachName: (state, action: PayloadAction<string | null>) => {
+    setChatCoachName: (state, action: PayloadAction<string | null>) => {
       state.coachName = action.payload
       if (action.payload) {
         state.lastActiveCoach = action.payload
@@ -995,12 +996,12 @@ export const {
   setTempCoachName,
   setCurrentSuggestionBubbleHeight,
   setPendingResponse,
-  // setCoachName,
+  setChatCoachName,
   handleRegeneratedTask,
-  // setIsWebSocketReady,
+  setIsChatWebSocketReady,
   setIsWebSocketConnected,
   setMessages,
-  // setServiceName,
+  setChatServiceName,
   addSuggestions,
   addTaskToContent,
   addSuggestionToContent,
@@ -1009,8 +1010,8 @@ export const {
   setAiVoiceMessages,
   clearChatContent,
   clearLogArray,
-  // setCoaches,
-  // setLastActiveCoach,
+  setChatCoaches,
+  setChatLastActiveCoach,
   setLastUserMessage,
   setHasErrorMessage,
   setSystemMessages,

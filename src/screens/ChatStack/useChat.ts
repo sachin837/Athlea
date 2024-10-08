@@ -11,6 +11,7 @@ export const useChat = () => {
 
   const [snapPoints] = useState(['100%'])
   const [isVisible, setIsVisible] = useState<boolean>(false)
+  const [isVisibleTraining, setIsVisibleTraining] = useState<boolean>(false)
 
   const chatLayoutProps = useChatLayout()
 
@@ -95,5 +96,7 @@ export const useChat = () => {
     backToHome,
     isVisible,
     setIsVisible,
+    isVisibleTraining,
+    setIsVisibleTraining,
   }
 }

@@ -27,9 +27,9 @@ import chatReducer from './chat';
 // import taskReducer from './task';
 // import taskMessageReducer from './taskMessage';
 // import calendarReducer from './calendar';
-// import colorModeReducer from './colorMode';
+import colorModeReducer from './colorMode';
 // import sessionReducer from './session';
-// import usersReducer from './user'
+import usersReducer from './user'
 
 const reducer = combineReducers({
   threads: threadsReducer,
@@ -39,7 +39,7 @@ const reducer = combineReducers({
   posts: postsReducer,
   auth: authenticationReducer,
   authUser: userDataFromAuthReducer,
-  // user: usersReducer,
+  user: usersReducer,
   job: jobReducer,
   chat: chatReducer,
   heartRate: heartRateReducer,
@@ -52,6 +52,7 @@ const reducer = combineReducers({
   sleep: sleepReducer,
   exerciseTime: activitiesReducer,
   favorites: favoritesReducer,
+  colormode: colorModeReducer,
   // other reducers can go here
 });
 

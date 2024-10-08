@@ -83,6 +83,35 @@ export const AIButton = styled.TouchableOpacity<{color: string, selected: boolea
         justify-content: center;
     `}
 `
+export const AthleaContainer = styled.View`
+    ${({ theme }) => css`
+        flex-direction: column;
+        gap: 2px;
+        margin-top: 2px;
+    `}
+`
+export const AIContainerHeader = styled.View`
+    ${({ theme }) => css`
+        border-radius: 100px;
+        border: 1px solid ${theme.border};
+        padding: 3px;
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 2px;
+    `}
+`
+
+export const AIButtonHeader = styled.TouchableOpacity<{color: string, selected: boolean}>`
+    ${({ theme, color, selected }) => css`
+        width: 20px;
+        height: 20px;
+        border: 1px solid ${color};
+        background: ${selected ? theme.white : color};
+        border-radius: 100px;
+        align-items: center;
+        justify-content: center;
+    `}
+`
 export const ModalBackground = styled.View`
 flex: 1;
 justify-content: flex-start;
@@ -115,6 +144,13 @@ export const ActionItem = styled.TouchableOpacity`
 flex-direction: row;
 align-items: center;
 justify-content: space-between;
+padding: 10px;
+border-top-width: 1px;
+border-top-color: #e5e5e5;
+`;
+export const TrainingItem = styled.TouchableOpacity`
+flex-direction: row;
+align-items: center;
 padding: 10px;
 border-top-width: 1px;
 border-top-color: #e5e5e5;
